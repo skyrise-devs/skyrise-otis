@@ -23,13 +23,13 @@ A ferramenta registra, classifica, prioriza e despacha ocorrências (falhas téc
 
 ## Divisão do time
 
-| Pessoa | Parte | Branch |
-|---|---|---|
-| P1 | Dados, regras e deploy | `p1-dados` |
-| P2 | Tela do atendente + slides da banca | `p2-atendente` |
-| P3 | Tela do técnico + navegação | `p3-tecnico` |
-| P4 | Dashboard da gestão | `p4-dashboard` |
-| P5 | Identidade visual, vídeo e entrega | `p5-visual` |
+| Pessoa | Integrante | GitHub | Parte | Branch |
+|---|---|---|---|---|
+| P1 | Pedro Zigiotto | [@DevPedroZigi](https://github.com/DevPedroZigi) | Dados, regras e deploy | `p1-dados` |
+| P2 | Pedro Henrique | [@phthedevx](https://github.com/phthedevx) | Tela do atendente + slides da banca | `p2-atendente` |
+| P3 | Ju | _a definir_ | Tela do técnico + navegação | `p3-tecnico` |
+| P4 | Thiago Cunha | [@tcunha2004](https://github.com/tcunha2004) | Dashboard da gestão | `p4-dashboard` |
+| P5 | Gabriela Donato | [@Gabidonaato](https://github.com/Gabidonaato) | Identidade visual, vídeo e entrega | `p5-visual` |
 
 ## Como trabalhamos com o Git
 
@@ -39,7 +39,15 @@ A ferramenta registra, classifica, prioriza e despacha ocorrências (falhas téc
 4. Salve com mensagens claras: `git add .` e `git commit -m "Adiciona filtro por status na lista"`
 5. Envie: `git push`
 6. No GitHub, abra um **Pull Request** da sua branch para a `main`
-7. Quem testa a sua parte revisa e aprova (1→2, 2→3, 3→4, 4→5, 5→1)
+7. Quem testa a sua parte revisa e aprova:
+
+| Autor do PR | Quem revisa |
+|---|---|
+| P1 · Pedro Zigiotto | P5 · Gabriela |
+| P2 · Pedro Henrique | P1 · Pedro Zigiotto |
+| P3 · Ju | P2 · Pedro Henrique |
+| P4 · Thiago | P3 · Ju |
+| P5 · Gabriela | P4 · Thiago |
 
 **Regras**
 - Ninguém faz commit direto na `main`: ela é o que está publicado na Vercel e precisa estar sempre funcionando.
