@@ -21,6 +21,86 @@ A ferramenta registra, classifica, prioriza e despacha ocorrências (falhas téc
 | Falta de energia | MÉDIA |
 | Pedido de cliente | BAIXA |
 
+## Tecnologias
+
+Só o que vimos até a Fase 7 (mesma base do projeto ReaproveitaAi):
+
+- **React 19 + Vite**, JavaScript (JSX)
+- **CSS puro**: cada tela tem o próprio arquivo `.css`, e as cores ficam em variáveis no `src/index.css`
+- **useState / useEffect**, sem React Router: a troca de tela é um `useState` no `App.jsx`
+- **Sem back-end**: os dados ficam no `localStorage` do navegador
+- **ESLint**, verificado automaticamente em cada Pull Request
+
+## Como rodar
+
+```bash
+npm install
+npm run dev
+```
+
+Abra o endereço que aparecer no terminal (normalmente http://localhost:5173).
+Antes de abrir um PR, rode `npm run lint` e `npm run build`: o GitHub roda os dois e bloqueia se falhar.
+
+## Onde fica cada coisa
+
+```
+src/
+├── App.jsx                 estado das ocorrências + troca de tela
+├── index.css               variáveis de cor e fonte (P5)
+├── App.css                 layout geral e menu
+├── components/Header.jsx   menu provisório (P3 substitui)
+├── data/
+│   ├── ocorrencias.js      regras e funções dos dados (P1)
+│   └── dadosExemplo.js     elevadores, técnicos e ocorrências de exemplo (P1)
+└── telas/
+    ├── atendente/          P2
+    ├── tecnico/            P3
+    └── gestao/             P4
+```
+
+Cada pessoa mexe principalmente na própria pasta: assim quase não há conflito no Git.
+
+## Como usar os dados nas telas
+
+Cada ocorrência tem este formato:
+
+```js
+{
+  id: 'OC-0031',
+  tipo: 'passageiro_preso',        // passageiro_preso | falha_tecnica | falta_energia | pedido_cliente
+  prioridade: 'critica',           // calculada pelo tipo: critica | alta | media | baixa
+  status: 'aberta',                // aberta | em_atendimento | resolvida
+  elevadorId: 'EL-07',
+  tecnicoId: null,                 // 'TC-02' quando alguém assume
+  descricao: 'Pessoa presa no 10º andar',
+  solicitante: 'Recepção',
+  abertaEm: '2026-09-26T14:00:00.000Z',
+  atendimentoEm: null,
+  resolvidaEm: null,
+  historico: [{ status: 'aberta', data: '...', observacao: 'Ocorrência registrada' }],
+}
+```
+
+O `App.jsx` entrega para cada tela a lista `ocorrencias` e as ações abaixo (props):
+
+| Tela | Props |
+|---|---|
+| Atendente | `onRegistrar(dados)` devolve a ocorrência criada · `onExcluir(id)` |
+| Técnico | `onAtribuir(id, tecnicoId)` · `onAtualizarStatus(id, status, observacao)` |
+| Gestão | só leitura |
+
+Funções prontas em `src/data/ocorrencias.js`:
+
+| Função | Para que serve |
+|---|---|
+| `validarOcorrencia(dados)` | lista de mensagens de erro do formulário (vazia = pode salvar) |
+| `filaDeAtendimento(lista)` | não resolvidas, crítica primeiro e depois a mais antiga |
+| `buscarElevador(id)` / `buscarTecnico(id)` | dados do elevador ou do técnico |
+| `TIPOS`, `PRIORIDADES`, `STATUS` | rótulos para mostrar na tela (ex.: `TIPOS[o.tipo].rotulo`) |
+| `ELEVADORES`, `TECNICOS` | listas para os `<select>` do formulário |
+
+O botão **Restaurar dados de exemplo** no topo volta os 30 exemplos (útil antes de gravar o vídeo).
+
 ## Divisão do time
 
 | Pessoa | Integrante | GitHub | Parte | Branch |
