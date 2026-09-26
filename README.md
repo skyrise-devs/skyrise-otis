@@ -107,7 +107,7 @@ O botão **Restaurar dados de exemplo** no topo volta os 30 exemplos (útil ante
 |---|---|---|---|---|
 | P1 | Pedro Zigiotto | [@DevPedroZigi](https://github.com/DevPedroZigi) | Dados, regras e deploy | `p1-dados` |
 | P2 | Pedro Henrique | [@phthedevx](https://github.com/phthedevx) | Tela do atendente + slides da banca | `p2-atendente` |
-| P3 | Ju | _a definir_ | Tela do técnico + navegação | `p3-tecnico` |
+| P3 | Julia Rubio | [@Jurubioo2007](https://github.com/Jurubioo2007) | Tela do técnico + navegação | `p3-tecnico` |
 | P4 | Thiago Cunha | [@tcunha2004](https://github.com/tcunha2004) | Dashboard da gestão | `p4-dashboard` |
 | P5 | Gabriela Donato | [@Gabidonaato](https://github.com/Gabidonaato) | Identidade visual, vídeo e entrega | `p5-visual` |
 
