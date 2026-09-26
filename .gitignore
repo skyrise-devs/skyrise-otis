@@ -19,6 +19,7 @@ venv/
 !.env.example
 
 # Sistema e editores
+.claude/
 .DS_Store
 Thumbs.db
 desktop.ini

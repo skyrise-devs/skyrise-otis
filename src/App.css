@@ -1,0 +1,57 @@
+/* Layout geral e navegação provisória (a P3 substitui pelo menu definitivo) */
+#app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding: 12px 20px;
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.app-marca {
+  font-size: 20px;
+  color: var(--cor-destaque);
+}
+
+.app-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.app-nav button,
+.app-restaurar {
+  font: inherit;
+  padding: 6px 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  cursor: pointer;
+}
+
+.app-nav button.ativo {
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  color: #fff;
+}
+
+.app-restaurar {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.app-conteudo {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
