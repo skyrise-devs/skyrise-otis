@@ -115,6 +115,31 @@ export function criarOcorrencia(lista, { tipo, elevadorId, descricao, solicitant
   }
 }
 
+const CAMPOS_EDITAVEIS = ['tipo', 'elevadorId', 'descricao', 'solicitante']
+
+// Corrige os dados de uma ocorrência; se o tipo mudar, a prioridade é recalculada.
+// Status e técnico não mudam aqui: use atribuirTecnico e mudarStatus.
+export function editarOcorrencia(ocorrencia, mudancas) {
+  const atualizada = { ...ocorrencia }
+  for (const campo of CAMPOS_EDITAVEIS) {
+    if (mudancas[campo] !== undefined) {
+      atualizada[campo] = typeof mudancas[campo] === 'string' ? mudancas[campo].trim() : mudancas[campo]
+    }
+  }
+  atualizada.prioridade = calcularPrioridade(atualizada.tipo)
+
+  const alterados = CAMPOS_EDITAVEIS.filter(c => atualizada[c] !== ocorrencia[c])
+  if (alterados.length === 0) return ocorrencia
+
+  return {
+    ...atualizada,
+    historico: [
+      ...ocorrencia.historico,
+      { status: ocorrencia.status, data: agoraISO(), observacao: `Dados editados: ${alterados.join(', ')}` },
+    ],
+  }
+}
+
 // Atribuir um técnico já coloca a ocorrência em atendimento
 export function atribuirTecnico(ocorrencia, tecnicoId) {
   const tecnico = buscarTecnico(tecnicoId)
