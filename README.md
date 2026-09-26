@@ -1,5 +1,7 @@
 # SkyRise · Challenge OTIS 2026
 
+**Site no ar:** https://skyrise-otis.vercel.app
+
 Sistema de gestão de ocorrências de elevadores, desenvolvido pelo time **SkyRise** (FIAP · Engenharia de Software · 1º ano) para o Challenge 2026 com a OTIS.
 
 A ferramenta registra, classifica, prioriza e despacha ocorrências (falhas técnicas, falta de energia, passageiros presos e pedidos de clientes) para os técnicos de campo, e oferece um painel de indicadores para a gestão.
@@ -85,7 +87,7 @@ O `App.jsx` entrega para cada tela a lista `ocorrencias` e as ações abaixo (pr
 
 | Tela | Props |
 |---|---|
-| Atendente | `onRegistrar(dados)` devolve a ocorrência criada · `onExcluir(id)` |
+| Atendente | `onRegistrar(dados)` devolve a ocorrência criada · `onEditar(id, mudancas)` · `onExcluir(id)` |
 | Técnico | `onAtribuir(id, tecnicoId)` · `onAtualizarStatus(id, status, observacao)` |
 | Gestão | só leitura |
 
@@ -94,6 +96,7 @@ Funções prontas em `src/data/ocorrencias.js`:
 | Função | Para que serve |
 |---|---|
 | `validarOcorrencia(dados)` | lista de mensagens de erro do formulário (vazia = pode salvar) |
+| `editarOcorrencia(ocorrencia, mudancas)` | corrige tipo, elevador, descrição ou solicitante; se o tipo mudar, recalcula a prioridade e registra no histórico (nas telas, use a prop `onEditar`) |
 | `filaDeAtendimento(lista)` | não resolvidas, crítica primeiro e depois a mais antiga |
 | `buscarElevador(id)` / `buscarTecnico(id)` | dados do elevador ou do técnico |
 | `TIPOS`, `PRIORIDADES`, `STATUS` | rótulos para mostrar na tela (ex.: `TIPOS[o.tipo].rotulo`) |
@@ -143,6 +146,6 @@ O botão **Restaurar dados de exemplo** no topo volta os 30 exemplos (útil ante
 
 ## Links
 
-- Deploy: _a definir_
+- Deploy: https://skyrise-otis.vercel.app (atualiza sozinho a cada merge na `main`)
 - Vídeo Sprint 1: https://youtu.be/Gt166Ju_NXw
 - Vídeo Sprint 2: _a definir_

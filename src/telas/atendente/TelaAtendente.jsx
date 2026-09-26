@@ -3,7 +3,8 @@ import './atendente.css'
 
 // P2 · Pedro Henrique
 // A fazer: formulário de abertura (use validarOcorrencia + onRegistrar),
-// lista com busca e filtros, e a tela de detalhe com o histórico.
+// lista com busca e filtros, e a tela de detalhe com o histórico
+// (para corrigir uma ocorrência, use onEditar).
 function TelaAtendente({ ocorrencias }) {
   return (
     <section className="tela-atendente">

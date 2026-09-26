@@ -8,6 +8,7 @@ import {
   salvarOcorrencias,
   dadosDeExemplo,
   criarOcorrencia,
+  editarOcorrencia,
   atribuirTecnico,
   mudarStatus,
 } from './data/ocorrencias'
@@ -38,6 +39,10 @@ function App() {
     return nova
   }
 
+  function editar(id, mudancas) {
+    alterar(id, o => editarOcorrencia(o, mudancas))
+  }
+
   function atribuir(id, tecnicoId) {
     alterar(id, o => atribuirTecnico(o, tecnicoId))
   }
@@ -63,6 +68,7 @@ function App() {
           <TelaAtendente
             ocorrencias={ocorrencias}
             onRegistrar={registrarOcorrencia}
+            onEditar={editar}
             onExcluir={excluirOcorrencia}
           />
         )}
