@@ -1,4 +1,118 @@
-/* Estilos da tela da gestão (P4) */
-.tela-gestao h1 {
-  margin-top: 0;
+/* P4 · Gestão. Estilos locais com os tokens globais da P5. */
+.tela-gestao { display: grid; gap: 24px; min-width: 0; }
+.gestao-cabecalho { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.gestao-sobretitulo {
+  margin: 0 0 4px;
+  color: var(--cor-destaque);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.tela-gestao h1 { margin: 0; font-size: 32px; line-height: 1.2; letter-spacing: -.03em; }
+.gestao-descricao { margin: 8px 0 0; color: var(--cor-texto-suave); }
+.gestao-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-suave);
+  font-size: 12px;
+}
+.gestao-etiqueta::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cor-destaque); }
+.gestao-painel, .gestao-card {
+  min-width: 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+.gestao-painel { padding: 24px; }
+.gestao-filtros { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 16px; padding: 18px 20px; }
+.gestao-campo { display: grid; gap: 6px; }
+.gestao-campo label { font-size: 13px; font-weight: 600; }
+.gestao-campo select, .gestao-campo input {
+  min-height: 42px;
+  min-width: 160px;
+  padding: 8px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 14px;
+  color-scheme: light;
+}
+.gestao-campo select { min-width: 210px; cursor: pointer; }
+.tela-gestao :is(select, input, button, summary):focus-visible { outline: 2px solid var(--cor-destaque); outline-offset: 3px; }
+.gestao-campo input[aria-invalid='true'] { border-color: var(--cor-critica); }
+.gestao-filtro-resumo { margin: 0 0 2px auto; font-size: 14px; font-weight: 600; }
+.gestao-filtro-resumo span { display: block; color: var(--cor-texto-suave); font-size: 12px; font-weight: 400; }
+.gestao-erro { width: 100%; margin: 0; color: var(--cor-critica); font-size: 13px; }
+.gestao-contagem { margin: -10px 0 -12px; color: var(--cor-texto-suave); font-size: 13px; }
+.gestao-indicadores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; }
+.gestao-card { padding: 20px; border-top: 3px solid var(--cor-destaque); }
+.gestao-card dt {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+.gestao-card-icone {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--raio);
+  color: var(--cor-destaque);
+  background: color-mix(in srgb, var(--cor-destaque) 8%, var(--cor-superficie));
+}
+.gestao-card-icone svg { width: 20px; height: 20px; }
+.gestao-card dd {
+  margin: 12px 0 8px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.gestao-card dd.gestao-card-duracao { font-size: 28px; line-height: 1.55; }
+.gestao-card p { margin: 0; color: var(--cor-texto-suave); font-size: 12px; }
+.gestao-card-criticas.com-criticas { border-top-color: var(--cor-critica); }
+.gestao-card-criticas.com-criticas dd { color: var(--cor-critica); }
+.gestao-card-criticas.com-criticas .gestao-card-icone {
+  color: var(--cor-critica);
+  background: color-mix(in srgb, var(--cor-critica) 8%, var(--cor-superficie));
+}
+.gestao-vazio { padding: 32px 20px; text-align: center; }
+.gestao-vazio p { margin: 6px 0 0; color: var(--cor-texto-suave); font-size: 14px; }
+@media (max-width: 1000px) {
+  .gestao-indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .tela-gestao { gap: 20px; }
+  .gestao-cabecalho { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .tela-gestao h1 { font-size: 28px; }
+  .gestao-descricao { font-size: 14px; }
+  .gestao-painel { padding: 18px; }
+  .gestao-campo { flex: 1 1 100%; min-width: 0; }
+  .gestao-campo :is(select, input) { min-width: 0; width: 100%; }
+  .gestao-filtro-resumo { margin-left: 0; }
+  .gestao-indicadores { gap: 12px; }
+  .gestao-card { padding: 16px; }
+  .gestao-card dt { min-height: 42px; gap: 6px; }
+  .gestao-card-icone { width: 26px; height: 26px; }
+  .gestao-card dd { font-size: 30px; }
+  .gestao-card dd.gestao-card-duracao { font-size: 23px; }
+}
+@media (max-width: 380px) {
+  .gestao-indicadores { grid-template-columns: minmax(0, 1fr); }
 }
