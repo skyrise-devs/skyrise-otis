@@ -138,6 +138,52 @@
 .tela-gestao th, .tela-gestao td { padding: 10px 12px; border-bottom: 1px solid var(--cor-borda); }
 .tela-gestao thead { background: var(--cor-fundo); }
 .tela-gestao tbody th { font-weight: 400; }
+.gestao-reincidentes { border-top: 3px solid var(--cor-alta); }
+.gestao-reincidentes .gestao-sobretitulo { margin: 0 0 6px; color: var(--cor-alta); font-size: 11px; }
+.gestao-regra-reincidencia {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--raio);
+  background: var(--cor-fundo);
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+.gestao-total-alertas { margin: 20px 0 12px; font-size: 14px; font-weight: 600; }
+.gestao-lista-reincidentes { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.gestao-reincidente {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(120px, .6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  border: 1px solid var(--cor-borda);
+  border-left: 3px solid var(--cor-alta);
+  border-radius: var(--raio);
+}
+.gestao-elevador-id {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: calc(var(--raio) / 2);
+  background: color-mix(in srgb, var(--cor-alta) 8%, var(--cor-superficie));
+  color: var(--cor-alta);
+  font-size: 11px;
+  font-weight: 700;
+}
+.gestao-reincidente h3 { margin: 8px 0 4px; font-size: 15px; }
+.gestao-reincidente p { margin: 4px 0 0; color: var(--cor-texto-suave); font-size: 12px; }
+.gestao-reincidente p.gestao-ultima-falha { margin-top: 10px; font-size: 11px; }
+.gestao-reincidente-numeros strong { font-size: 30px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.gestao-reincidente-numeros strong span { display: block; margin-top: 4px; font-size: 12px; font-weight: 400; color: var(--cor-texto-suave); }
+.gestao-reincidente-numeros p { margin-top: 12px; font-weight: 600; }
+.gestao-recomendacao { padding-left: 20px; border-left: 1px solid var(--cor-borda); }
+.gestao-recomendacao strong { font-size: 13px; }
+.gestao-recomendacao p { margin-top: 8px; }
+.gestao-nota-preventiva { margin: 16px 0 0; color: var(--cor-texto-suave); font-size: 12px; }
+.gestao-sem-reincidentes { margin-top: 16px; background: var(--cor-fundo); border-radius: var(--raio); }
+@media (max-width: 800px) {
+  .gestao-reincidente { grid-template-columns: minmax(0, 1fr) auto; gap: 20px; }
+  .gestao-recomendacao { grid-column: 1 / -1; padding: 16px 0 0; border-left: 0; border-top: 1px solid var(--cor-borda); }
+}
 @media (max-width: 1100px) {
   .gestao-graficos .gestao-painel-cabecalho { flex-wrap: wrap; }
 }
@@ -162,7 +208,10 @@
   .gestao-graficos { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .gestao-painel-cabecalho { flex-wrap: wrap; }
   .gestao-grafico-tempo { min-height: 160px; }
+  .gestao-reincidente { padding: 16px; }
+  .gestao-reincidente-numeros strong { font-size: 26px; }
 }
 @media (max-width: 380px) {
   .gestao-indicadores { grid-template-columns: minmax(0, 1fr); }
+  .gestao-reincidente { grid-template-columns: minmax(0, 1fr); }
 }
