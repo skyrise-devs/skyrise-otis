@@ -85,7 +85,7 @@
   font-variant-numeric: tabular-nums;
 }
 .gestao-card dd.gestao-card-duracao { font-size: 28px; line-height: 1.55; }
-.gestao-card p { margin: 0; color: var(--cor-texto-suave); font-size: 12px; }
+.gestao-card dd.gestao-card-legenda { margin: 0; color: var(--cor-texto-suave); font-size: 12px; font-weight: 400; line-height: 1.5; letter-spacing: normal; }
 .gestao-card-criticas.com-criticas { border-top-color: var(--cor-critica); }
 .gestao-card-criticas.com-criticas dd { color: var(--cor-critica); }
 .gestao-card-criticas.com-criticas .gestao-card-icone {
@@ -126,6 +126,8 @@
 .gestao-alternador button:hover { background: var(--cor-fundo); color: var(--cor-texto); }
 .gestao-alternador button[aria-pressed='true']:hover { background: var(--cor-destaque); color: var(--cor-superficie); }
 .gestao-grafico-tempo { display: block; width: 100%; height: auto; }
+.gestao-tempo-scroll { overflow-x: auto; border-radius: calc(var(--raio) / 2); }
+.gestao-tempo-scroll:focus-visible { outline: 2px solid var(--cor-destaque); outline-offset: 3px; }
 .gestao-grafico-eixo line { stroke: var(--cor-borda); stroke-dasharray: 4 4; }
 .gestao-grafico-eixo text, .gestao-grafico-rotulo { fill: var(--cor-texto-suave); font-size: 12px; font-family: var(--fonte); }
 .gestao-coluna { fill: var(--cor-destaque); }
@@ -207,7 +209,8 @@
   .gestao-card dd.gestao-card-duracao { font-size: 23px; }
   .gestao-graficos { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .gestao-painel-cabecalho { flex-wrap: wrap; }
-  .gestao-grafico-tempo { min-height: 160px; }
+  .gestao-grafico-tempo { min-width: 600px; }
+  .gestao-grafico-tempo text { font-size: 18px; }
   .gestao-reincidente { padding: 16px; }
   .gestao-reincidente-numeros strong { font-size: 26px; }
 }

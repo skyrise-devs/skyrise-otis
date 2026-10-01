@@ -32,6 +32,7 @@ test('período personalizado inclui o dia final inteiro no horário local', () =
   ]
   assert.deepEqual(filtrarPorPeriodo(registros, intervalo), registros.slice(1, 3))
   assert.ok(obterIntervalo('personalizado', '', '', agora).erro)
+  assert.ok(obterIntervalo('personalizado', '2026-02-30', '2026-03-01', agora).erro)
   assert.ok(obterIntervalo('personalizado', '2026-10-02', '2026-10-01', agora).erro)
 })
 

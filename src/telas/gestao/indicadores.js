@@ -20,7 +20,8 @@ export function obterIntervalo(periodo, inicio, fim, agora = new Date()) {
     if (!inicio || !fim) return { erro: 'Informe a data inicial e a data final.' }
     const de = inicioDoDia(inicio)
     const ate = inicioDoDia(fim)
-    if (!Number.isFinite(de.getTime()) || !Number.isFinite(ate.getTime())) {
+    if (!Number.isFinite(de.getTime()) || !Number.isFinite(ate.getTime()) ||
+      dataLocal(de) !== inicio || dataLocal(ate) !== fim) {
       return { erro: 'Informe datas válidas.' }
     }
     if (de > ate) return { erro: 'A data inicial deve ser anterior ou igual à data final.' }

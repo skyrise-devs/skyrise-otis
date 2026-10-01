@@ -37,6 +37,7 @@ function GraficoPeriodo({ ocorrencias, intervalo }) {
         </div>
         <span className="gestao-etiqueta">{ocorrencias.length} no período</span>
       </div>
+      <div className="gestao-tempo-scroll" tabIndex={0} role="region" aria-label="Gráfico temporal com rolagem horizontal em telas pequenas">
       <svg className="gestao-grafico-tempo" viewBox="0 0 960 260" role="img"
         aria-label={`Gráfico de ocorrências por ${rotulosEscala[escala]}. ${ocorrencias.length} no período. Valores completos disponíveis em Ver dados do gráfico.`}>
         {[0, Math.ceil(maior / 2), maior].map(valor => {
@@ -51,13 +52,14 @@ function GraficoPeriodo({ ocorrencias, intervalo }) {
           const altura = grupo.total / maior * 180
           return <g key={grupo.id}>
             <rect className="gestao-coluna" x={x - largura / 2} y={210 - altura} width={largura} height={altura} rx="3">
-              <title>{grupo.detalhe}: {grupo.total} ocorrências</title>
+              <title>{`${grupo.detalhe}: ${grupo.total} ocorrências`}</title>
             </rect>
-            {(indice % marcaCada === 0 || indice === grupos.length - 1) &&
+            {((indice % marcaCada === 0 && grupos.length - 1 - indice >= marcaCada / 2) || indice === grupos.length - 1) &&
               <text className="gestao-grafico-rotulo" x={x} y="239" textAnchor="middle">{grupo.rotulo}</text>}
           </g>
         })}
       </svg>
+      </div>
       <details className="gestao-dados-grafico">
         <summary>Ver dados do gráfico</summary>
         <div className="gestao-tabela-scroll">

@@ -97,24 +97,24 @@ function TelaGestao({ ocorrencias }) {
         <div className="gestao-card">
           <dt>Total de ocorrências<span className="gestao-card-icone"><IconeIndicador tipo="total" /></span></dt>
           <dd>{intervalo.erro ? '—' : indicadores.total}</dd>
-          <p>No período selecionado</p>
+          <dd className="gestao-card-legenda">No período selecionado</dd>
         </div>
         <div className="gestao-card">
           <dt>Abertas<span className="gestao-card-icone"><IconeIndicador tipo="abertas" /></span></dt>
           <dd>{intervalo.erro ? '—' : indicadores.abertas}</dd>
-          <p>{intervalo.erro ? 'Aguardando período válido' : `${indicadores.emAtendimento} em atendimento no período`}</p>
+          <dd className="gestao-card-legenda">{intervalo.erro ? 'Aguardando período válido' : `${indicadores.emAtendimento} em atendimento no período`}</dd>
         </div>
         <div className={`gestao-card gestao-card-criticas${indicadores.criticas ? ' com-criticas' : ''}`}>
           <dt>Críticas agora<span className="gestao-card-icone"><IconeIndicador tipo="criticas" /></span></dt>
           <dd>{indicadores.criticas}</dd>
-          <p>Pendentes em todo o histórico</p>
+          <dd className="gestao-card-legenda">Pendentes em todo o histórico</dd>
         </div>
         <div className="gestao-card">
           <dt>Tempo médio de resolução<span className="gestao-card-icone"><IconeIndicador tipo="tempo" /></span></dt>
           <dd className="gestao-card-duracao">{intervalo.erro ? '—' : formatarDuracao(indicadores.tempoMedio)}</dd>
-          <p>{intervalo.erro ? 'Aguardando período válido' : indicadores.resolvidas
+          <dd className="gestao-card-legenda">{intervalo.erro ? 'Aguardando período válido' : indicadores.resolvidas
             ? `Abertura até resolução · ${indicadores.resolvidas} concluídas`
-            : 'Sem resoluções válidas no período'}</p>
+            : 'Sem resoluções válidas no período'}</dd>
         </div>
       </dl>
 
