@@ -104,6 +104,27 @@ Funções prontas em `src/data/ocorrencias.js`:
 
 O botão **Restaurar dados de exemplo** no topo volta os 30 exemplos (útil antes de gravar o vídeo).
 
+## Dashboard da gestão (P4)
+
+A tela **Gestão** é somente leitura e usa as ocorrências compartilhadas pelo `App.jsx`. Os estilos seguem as variáveis de cor, fonte e borda do `src/index.css`; os gráficos usam CSS e SVG, sem dependências adicionais.
+
+- **Período:** últimos 7, 30 ou 90 dias, todo o histórico até hoje ou datas personalizadas. O filtro considera a **data de abertura**, no horário local, incluindo o dia final inteiro. As janelas em dias incluem hoje.
+- **Total e abertas:** registros do período e ocorrências ainda no status `aberta`. A quantidade em atendimento aparece abaixo do card de abertas.
+- **Críticas agora:** todas as críticas não resolvidas, incluindo as em atendimento, **independentemente do filtro**.
+- **Tempo médio de resolução:** da abertura até a resolução, somente para ocorrências resolvidas abertas no período com datas válidas. Sem resoluções, aparece `—`.
+- **Gráficos:** distribuição por tipo, por região ou elevador e evolução das aberturas. O gráfico temporal usa dias até 31 dias, semanas até 120 dias e meses em intervalos maiores. Os valores também estão disponíveis em **Ver dados do gráfico**.
+- **Elevadores reincidentes:** equipamentos com **3 ou mais ocorrências de falha técnica ou passageiro preso nos últimos 30 dias**, em uma janela fixa independente do filtro. Pedidos de cliente e falta de energia não entram no alerta. O painel mostra quantidade, pendências, última falha, tipo mais frequente e orientação para inspeção preventiva.
+
+O lado preditivo do MVP é um **sinal preventivo por reincidência**, baseado no histórico, sem estimar a data ou probabilidade de uma falha futura. Nos dados de exemplo, o **EL-03** aciona o alerta.
+
+Para verificar as regras do dashboard:
+
+```bash
+node --test src/telas/gestao/indicadores.test.js
+npm run lint
+npm run build
+```
+
 ## Divisão do time
 
 | Pessoa | Integrante | GitHub | Parte | Branch |
