@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import GraficosGestao from './GraficosGestao.jsx'
 import {
   dataLocal, obterIntervalo, filtrarPorPeriodo, calcularIndicadores, formatarDuracao,
 } from './indicadores.js'
@@ -120,6 +121,7 @@ function TelaGestao({ ocorrencias }) {
         <strong>Nenhuma ocorrência neste período</strong>
         <p>Escolha outro intervalo para consultar o histórico da operação.</p>
       </div>}
+      {!intervalo.erro && filtradas.length > 0 && <GraficosGestao ocorrencias={filtradas} intervalo={intervalo} />}
     </section>
   )
 }
