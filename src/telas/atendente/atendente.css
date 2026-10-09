@@ -26,3 +26,17 @@
   margin: 0;
   color: var(--cor-texto-suave);
 }
+
+/* Cartão: caixa branca usada em cada seção (formulário, lista, detalhes) */
+.tela-atendente .at-cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--at-sombra);
+  padding: var(--at-espaco-grande);
+}
+
+.tela-atendente .at-cartao h2 {
+  margin: 0 0 var(--at-espaco);
+  font-size: 20px;
+}
