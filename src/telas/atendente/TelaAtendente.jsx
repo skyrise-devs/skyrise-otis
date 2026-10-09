@@ -1,4 +1,3 @@
-import { TIPOS, STATUS, buscarElevador } from '../../data/ocorrencias'
 import './atendente.css'
 
 // P2 · Pedro Henrique
@@ -8,16 +7,26 @@ import './atendente.css'
 function TelaAtendente({ ocorrencias }) {
   return (
     <section className="tela-atendente">
-      <h1>Atendente</h1>
-      <p>{ocorrencias.length} ocorrências registradas. Esta tela é da P2.</p>
+      <header className="at-cabecalho">
+        <h1>Portal do Atendente</h1>
+        <p>Registre chamados, acompanhe a fila e corrija ocorrências.</p>
+      </header>
 
-      <ul>
-        {ocorrencias.slice(0, 5).map(o => (
-          <li key={o.id}>
-            <b>{o.id}</b> · {TIPOS[o.tipo].rotulo} · {buscarElevador(o.elevadorId)?.predio} · {STATUS[o.status].rotulo}
-          </li>
-        ))}
-      </ul>
+      <div className="at-colunas">
+        <div className="at-coluna-form">
+          <section className="at-cartao">
+            <h2>Nova ocorrência</h2>
+            <p>Formulário em construção.</p>
+          </section>
+        </div>
+
+        <div className="at-coluna-lista">
+          <section className="at-cartao">
+            <h2>Ocorrências</h2>
+            <p>{ocorrencias.length} ocorrências registradas.</p>
+          </section>
+        </div>
+      </div>
     </section>
   )
 }
