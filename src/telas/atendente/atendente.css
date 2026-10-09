@@ -102,3 +102,35 @@
   flex: 2 1 480px;
   min-width: 0;
 }
+
+/* Resumo no topo: quantas ocorrências, quantas abertas e quantas críticas */
+.tela-atendente .at-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--at-espaco);
+}
+
+.tela-atendente .at-resumo-item {
+  flex: 1 1 160px;
+  padding: var(--at-espaco);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--at-sombra);
+}
+
+.tela-atendente .at-resumo-numero {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tela-atendente .at-resumo-rotulo {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-resumo-item.critico .at-resumo-numero {
+  color: var(--cor-critica);
+}
