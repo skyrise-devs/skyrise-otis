@@ -40,3 +40,48 @@
   margin: 0 0 var(--at-espaco);
   font-size: 20px;
 }
+
+/* Botões: base + variações (primário, perigo) */
+.tela-atendente .at-btn {
+  font: inherit;
+  padding: 8px 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  cursor: pointer;
+}
+
+.tela-atendente .at-btn:hover {
+  border-color: var(--cor-destaque);
+}
+
+.tela-atendente .at-btn:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.tela-atendente .at-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tela-atendente .at-btn-primario {
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  color: #fff;
+}
+
+.tela-atendente .at-btn-primario:hover {
+  filter: brightness(1.1);
+}
+
+.tela-atendente .at-btn-perigo {
+  border-color: var(--cor-critica);
+  color: var(--cor-critica);
+}
+
+.tela-atendente .at-btn-perigo:hover {
+  background: var(--cor-critica);
+  color: #fff;
+}
