@@ -85,3 +85,20 @@
   background: var(--cor-critica);
   color: #fff;
 }
+
+/* Duas colunas (formulário | lista) com flexbox; em tela estreita quebram em linhas */
+.tela-atendente .at-colunas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--at-espaco-grande);
+}
+
+.tela-atendente .at-coluna-form {
+  flex: 1 1 340px;
+}
+
+.tela-atendente .at-coluna-lista {
+  flex: 2 1 480px;
+  min-width: 0;
+}
