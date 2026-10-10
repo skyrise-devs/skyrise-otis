@@ -134,3 +134,34 @@
 .tela-atendente .at-resumo-item.critico .at-resumo-numero {
   color: var(--cor-critica);
 }
+
+/* Badge de prioridade: as cores vêm das variáveis do index.css.
+   O texto sempre aparece (não depende só da cor) e a média usa texto escuro por causa do amarelo. */
+.tela-atendente .at-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.tela-atendente .at-badge-critica {
+  background: var(--cor-critica);
+}
+
+.tela-atendente .at-badge-alta {
+  background: var(--cor-alta);
+}
+
+.tela-atendente .at-badge-media {
+  background: var(--cor-media);
+  color: var(--cor-texto);
+}
+
+.tela-atendente .at-badge-baixa {
+  background: var(--cor-baixa);
+}
