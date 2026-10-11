@@ -30,6 +30,11 @@ function PainelPrioridades() {
           </li>
         ))}
       </ul>
+
+      <p className="at-aviso-fila">
+        <strong>Passageiro preso fura a fila:</strong> a ocorrência vai para o topo da
+        fila do técnico, na frente de qualquer outra.
+      </p>
     </section>
   )
 }
