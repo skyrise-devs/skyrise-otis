@@ -165,3 +165,44 @@
 .tela-atendente .at-badge-baixa {
   background: var(--cor-baixa);
 }
+
+/* Painel de prioridades: uma linha por tipo, com o badge de largura fixa à esquerda */
+.tela-atendente .at-painel-prioridades p {
+  margin: 0 0 var(--at-espaco);
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.tela-atendente .at-lista-prioridades {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tela-atendente .at-lista-prioridades li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-lista-prioridades li:last-child {
+  border-bottom: none;
+}
+
+.tela-atendente .at-lista-prioridades .at-badge {
+  flex: 0 0 84px;
+  text-align: center;
+}
+
+.tela-atendente .at-tipo-rotulo {
+  display: block;
+  font-weight: 600;
+}
+
+.tela-atendente .at-tipo-dica {
+  display: block;
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
