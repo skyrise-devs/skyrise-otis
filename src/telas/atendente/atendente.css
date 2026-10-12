@@ -216,3 +216,10 @@
   background: rgba(198, 40, 40, 0.08);
   color: var(--cor-texto);
 }
+
+/* A coluna do formulário agora tem mais de um cartão: empilha com espaço entre eles */
+.tela-atendente .at-coluna-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco-grande);
+}
