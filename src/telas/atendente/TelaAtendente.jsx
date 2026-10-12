@@ -1,3 +1,4 @@
+import PainelPrioridades from './components/PainelPrioridades'
 import './atendente.css'
 
 // P2 · Pedro Henrique
@@ -37,6 +38,8 @@ function TelaAtendente({ ocorrencias }) {
             <h2>Nova ocorrência</h2>
             <p>Formulário em construção.</p>
           </section>
+
+          <PainelPrioridades />
         </div>
 
         <div className="at-coluna-lista">
