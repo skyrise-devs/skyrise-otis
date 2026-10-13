@@ -1,6 +1,6 @@
 // Formulário de abertura de ocorrência (também usado para corrigir os dados)
 import { useState } from 'react'
-import { TIPOS } from '../../../data/ocorrencias'
+import { TIPOS, ELEVADORES } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS } from '../utilsAtendente'
 
 const DADOS_VAZIOS = { tipo: '', elevadorId: '', descricao: '', solicitante: '' }
@@ -25,6 +25,16 @@ function FormularioOcorrencia() {
           <option value="">Selecione o tipo</option>
           {ORDEM_DOS_TIPOS.map(tipo => (
             <option key={tipo} value={tipo}>{TIPOS[tipo].rotulo}</option>
+          ))}
+        </select>
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Elevador</span>
+        <select name="elevadorId" value={dados.elevadorId} onChange={atualizarCampo}>
+          <option value="">Selecione o elevador</option>
+          {ELEVADORES.map(e => (
+            <option key={e.id} value={e.id}>{`${e.id} · ${e.predio} (${e.identificacao})`}</option>
           ))}
         </select>
       </label>
