@@ -40,6 +40,17 @@ function FormularioOcorrencia() {
       </label>
 
       <label className="at-campo">
+        <span className="at-campo-rotulo">Descreva o problema</span>
+        <textarea
+          name="descricao"
+          rows="4"
+          value={dados.descricao}
+          onChange={atualizarCampo}
+          placeholder="Ex.: duas pessoas presas entre o 5º e o 6º andar"
+        />
+      </label>
+
+      <label className="at-campo">
         <span className="at-campo-rotulo">Quem está solicitando</span>
         <input
           type="text"
