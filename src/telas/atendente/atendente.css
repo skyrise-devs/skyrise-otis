@@ -266,3 +266,12 @@
   outline: 2px solid var(--cor-destaque);
   outline-offset: 1px;
 }
+
+/* Área dos botões do formulário: alinhados à direita (o modo de edição terá dois botões) */
+.tela-atendente .at-form-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
