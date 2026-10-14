@@ -223,3 +223,46 @@
   flex-direction: column;
   gap: var(--at-espaco-grande);
 }
+
+/* Formulário: cada campo é um label com o texto em cima e o controle embaixo */
+.tela-atendente .at-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco);
+}
+
+.tela-atendente .at-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tela-atendente .at-campo-rotulo {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tela-atendente .at-campo input,
+.tela-atendente .at-campo select,
+.tela-atendente .at-campo textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.tela-atendente .at-campo textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.tela-atendente .at-campo input:focus,
+.tela-atendente .at-campo select:focus,
+.tela-atendente .at-campo textarea:focus {
+  border-color: var(--cor-destaque);
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 1px;
+}
