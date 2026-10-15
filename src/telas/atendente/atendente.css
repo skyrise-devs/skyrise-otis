@@ -275,3 +275,9 @@
   gap: 12px;
   margin-top: 4px;
 }
+
+/* Texto de apoio embaixo de um campo (ex.: endereço do elevador escolhido) */
+.tela-atendente .at-campo-dica {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
