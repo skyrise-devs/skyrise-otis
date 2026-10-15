@@ -1,3 +1,4 @@
+import FormularioOcorrencia from './components/FormularioOcorrencia'
 import PainelPrioridades from './components/PainelPrioridades'
 import './atendente.css'
 
@@ -36,7 +37,7 @@ function TelaAtendente({ ocorrencias }) {
         <div className="at-coluna-form">
           <section className="at-cartao">
             <h2>Nova ocorrência</h2>
-            <p>Formulário em construção.</p>
+            <FormularioOcorrencia />
           </section>
 
           <PainelPrioridades />
