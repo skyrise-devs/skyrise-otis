@@ -1,12 +1,15 @@
 // Formulário de abertura de ocorrência (também usado para corrigir os dados)
 import { useState } from 'react'
-import { TIPOS, ELEVADORES } from '../../../data/ocorrencias'
+import { TIPOS, ELEVADORES, buscarElevador } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS } from '../utilsAtendente'
 
 const DADOS_VAZIOS = { tipo: '', elevadorId: '', descricao: '', solicitante: '' }
 
 function FormularioOcorrencia() {
   const [dados, setDados] = useState(DADOS_VAZIOS)
+
+  // Elevador escolhido (undefined enquanto nenhum for selecionado)
+  const elevador = buscarElevador(dados.elevadorId)
 
   // Um só handler para todos os campos: o name do campo diz qual chave do objeto muda
   function atualizarCampo(e) {
@@ -37,6 +40,9 @@ function FormularioOcorrencia() {
             <option key={e.id} value={e.id}>{`${e.id} · ${e.predio} (${e.identificacao})`}</option>
           ))}
         </select>
+        {elevador && (
+          <small className="at-campo-dica">{`${elevador.endereco} · Região ${elevador.regiao}`}</small>
+        )}
       </label>
 
       <label className="at-campo">
