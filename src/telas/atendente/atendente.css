@@ -281,3 +281,16 @@
   color: var(--cor-texto-suave);
   font-size: 13px;
 }
+
+/* Campo com problema: borda e mensagem em vermelho (a mensagem diz o que fazer, sem culpar o usuário) */
+.tela-atendente .at-campo-invalido input,
+.tela-atendente .at-campo-invalido select,
+.tela-atendente .at-campo-invalido textarea {
+  border-color: var(--cor-critica);
+}
+
+.tela-atendente .at-campo-erro {
+  color: var(--cor-critica);
+  font-size: 13px;
+  font-weight: 600;
+}
