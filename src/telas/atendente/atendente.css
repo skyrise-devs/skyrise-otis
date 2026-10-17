@@ -294,3 +294,17 @@
   font-size: 13px;
   font-weight: 600;
 }
+
+/* Aviso "Prioridade desta ocorrência: [CRÍTICA] fura a fila do técnico" embaixo do select de tipo */
+.tela-atendente .at-prioridade-aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-prioridade-aviso strong {
+  color: var(--cor-critica);
+}
