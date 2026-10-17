@@ -1,7 +1,8 @@
 // Formulário de abertura de ocorrência (também usado para corrigir os dados)
 import { useState } from 'react'
-import { TIPOS, ELEVADORES, buscarElevador, validarOcorrencia } from '../../../data/ocorrencias'
+import { TIPOS, ELEVADORES, buscarElevador, calcularPrioridade, validarOcorrencia } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS, errosPorCampo } from '../utilsAtendente'
+import BadgePrioridade from './BadgePrioridade'
 
 const DADOS_VAZIOS = { tipo: '', elevadorId: '', descricao: '', solicitante: '' }
 
@@ -12,6 +13,9 @@ function FormularioOcorrencia() {
 
   // Elevador escolhido (undefined enquanto nenhum for selecionado)
   const elevador = buscarElevador(dados.elevadorId)
+
+  // Prioridade que o sistema vai dar a esta ocorrência (vazia enquanto não houver tipo)
+  const prioridade = dados.tipo ? calcularPrioridade(dados.tipo) : ''
 
   // Calculado a cada render a partir dos dados: o erro some assim que o campo é corrigido
   const erros = tentouEnviar ? errosPorCampo(dados) : {}
@@ -44,6 +48,12 @@ function FormularioOcorrencia() {
             <option key={tipo} value={tipo}>{TIPOS[tipo].rotulo}</option>
           ))}
         </select>
+        {prioridade && (
+          <span className="at-prioridade-aviso">
+            Prioridade desta ocorrência: <BadgePrioridade prioridade={prioridade} />
+            {prioridade === 'critica' && <strong>fura a fila do técnico</strong>}
+          </span>
+        )}
         {erros.tipo && <span className="at-campo-erro" role="alert">{erros.tipo}</span>}
       </label>
 
