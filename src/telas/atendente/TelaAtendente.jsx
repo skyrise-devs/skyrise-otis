@@ -6,7 +6,7 @@ import './atendente.css'
 // A fazer: formulário de abertura (use validarOcorrencia + onRegistrar),
 // lista com busca e filtros, e a tela de detalhe com o histórico
 // (para corrigir uma ocorrência, use onEditar).
-function TelaAtendente({ ocorrencias }) {
+function TelaAtendente({ ocorrencias, onRegistrar }) {
   // Contadores do resumo: calculados a cada render, a partir da lista recebida por props
   const abertas = ocorrencias.filter(o => o.status === 'aberta').length
   const criticasAtivas = ocorrencias.filter(o => o.prioridade === 'critica' && o.status !== 'resolvida').length
@@ -37,7 +37,7 @@ function TelaAtendente({ ocorrencias }) {
         <div className="at-coluna-form">
           <section className="at-cartao">
             <h2>Nova ocorrência</h2>
-            <FormularioOcorrencia />
+            <FormularioOcorrencia onSalvar={onRegistrar} />
           </section>
 
           <PainelPrioridades />

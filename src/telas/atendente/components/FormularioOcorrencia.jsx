@@ -6,7 +6,8 @@ import BadgePrioridade from './BadgePrioridade'
 
 const DADOS_VAZIOS = { tipo: '', elevadorId: '', descricao: '', solicitante: '' }
 
-function FormularioOcorrencia() {
+// onSalvar recebe os dados do formulário quando eles estão válidos
+function FormularioOcorrencia({ onSalvar }) {
   const [dados, setDados] = useState(DADOS_VAZIOS)
   // Os erros só aparecem depois da primeira tentativa de registrar
   const [tentouEnviar, setTentouEnviar] = useState(false)
@@ -31,6 +32,12 @@ function FormularioOcorrencia() {
 
     // Lista vazia = pode salvar
     if (validarOcorrencia(dados).length > 0) return
+
+    onSalvar(dados)
+
+    // Formulário limpo e pronto para o próximo chamado
+    setDados(DADOS_VAZIOS)
+    setTentouEnviar(false)
   }
 
   return (
