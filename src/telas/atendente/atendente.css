@@ -308,3 +308,22 @@
 .tela-atendente .at-prioridade-aviso strong {
   color: var(--cor-critica);
 }
+
+/* Confirmação de registro: faixa verde, ligada à cor da prioridade baixa */
+.tela-atendente .at-aviso-registro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--cor-baixa);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: rgba(46, 125, 50, 0.08);
+}
+
+.tela-atendente .at-aviso-registro p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
