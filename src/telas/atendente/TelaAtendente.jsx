@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import AvisoRegistro from './components/AvisoRegistro'
 import FormularioOcorrencia from './components/FormularioOcorrencia'
 import PainelPrioridades from './components/PainelPrioridades'
 import './atendente.css'
@@ -7,9 +9,17 @@ import './atendente.css'
 // lista com busca e filtros, e a tela de detalhe com o histórico
 // (para corrigir uma ocorrência, use onEditar).
 function TelaAtendente({ ocorrencias, onRegistrar }) {
+  // Última ocorrência registrada (null = nenhum aviso na tela)
+  const [registrada, setRegistrada] = useState(null)
+
   // Contadores do resumo: calculados a cada render, a partir da lista recebida por props
   const abertas = ocorrencias.filter(o => o.status === 'aberta').length
   const criticasAtivas = ocorrencias.filter(o => o.prioridade === 'critica' && o.status !== 'resolvida').length
+
+  // onRegistrar devolve a ocorrência criada: guardamos para mostrar o número dela
+  function registrar(dados) {
+    setRegistrada(onRegistrar(dados))
+  }
 
   return (
     <section className="tela-atendente">
@@ -35,9 +45,13 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
 
       <div className="at-colunas">
         <div className="at-coluna-form">
+          {registrada && (
+            <AvisoRegistro ocorrencia={registrada} onFechar={() => setRegistrada(null)} />
+          )}
+
           <section className="at-cartao">
             <h2>Nova ocorrência</h2>
-            <FormularioOcorrencia onSalvar={onRegistrar} />
+            <FormularioOcorrencia onSalvar={registrar} />
           </section>
 
           <PainelPrioridades />
