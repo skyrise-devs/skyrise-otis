@@ -1,6 +1,6 @@
 // Funções de apoio da tela do atendente (P2):
 // formatar datas e aplicar busca + filtros na lista de ocorrências.
-import { ELEVADORES, validarOcorrencia } from '../../data/ocorrencias'
+import { ELEVADORES, filaDeAtendimento, validarOcorrencia } from '../../data/ocorrencias'
 
 const CAMPOS = ['tipo', 'elevadorId', 'descricao', 'solicitante']
 
@@ -43,4 +43,16 @@ export function formatarData(iso) {
   const minuto = String(data.getMinutes()).padStart(2, '0')
 
   return `${dia}/${mes}/${data.getFullYear()} ${hora}:${minuto}`
+}
+
+// Ordem da lista do atendente: primeiro o que ainda não foi resolvido, na ordem da fila do
+// técnico (crítica primeiro, depois a mais antiga: filaDeAtendimento do P1); depois as
+// resolvidas, da mais recente para a mais antiga. Devolve uma lista nova, sem alterar a original.
+export function ordenarOcorrencias(lista) {
+  const fila = filaDeAtendimento(lista)
+  const resolvidas = lista
+    .filter(o => o.status === 'resolvida')
+    .sort((a, b) => b.abertaEm.localeCompare(a.abertaEm))
+
+  return [...fila, ...resolvidas]
 }
