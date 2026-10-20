@@ -327,3 +327,30 @@
   margin: 4px 0 0;
   font-size: 14px;
 }
+
+/* Badge de status: tons de azul e cinza, para não ser confundido com as cores de prioridade */
+.tela-atendente .at-status {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tela-atendente .at-status-aberta {
+  color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+
+.tela-atendente .at-status-em_atendimento {
+  background: var(--cor-destaque);
+  color: #fff;
+}
+
+.tela-atendente .at-status-resolvida {
+  background: var(--cor-fundo);
+  border-color: var(--cor-borda);
+  color: var(--cor-texto-suave);
+}
