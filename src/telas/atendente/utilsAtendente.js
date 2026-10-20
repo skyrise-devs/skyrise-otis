@@ -30,3 +30,17 @@ export function errosPorCampo(dados) {
 
   return erros
 }
+
+// Data e hora no padrão brasileiro (ex.: 19/10/2026 11:05), no horário do navegador.
+// Se a data vier inválida, mostra um traço em vez de "NaN/NaN/NaN".
+export function formatarData(iso) {
+  const data = new Date(iso)
+  if (Number.isNaN(data.getTime())) return '—'
+
+  const dia = String(data.getDate()).padStart(2, '0')
+  const mes = String(data.getMonth() + 1).padStart(2, '0')
+  const hora = String(data.getHours()).padStart(2, '0')
+  const minuto = String(data.getMinutes()).padStart(2, '0')
+
+  return `${dia}/${mes}/${data.getFullYear()} ${hora}:${minuto}`
+}
