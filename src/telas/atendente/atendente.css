@@ -354,3 +354,64 @@
   border-color: var(--cor-borda);
   color: var(--cor-texto-suave);
 }
+
+/* Item da lista: cartão com uma faixa colorida à esquerda, na cor da prioridade */
+.tela-atendente .at-item {
+  padding: 12px 16px;
+  border: 1px solid var(--cor-borda);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+.tela-atendente .at-item-critica {
+  border-left-color: var(--cor-critica);
+}
+
+.tela-atendente .at-item-alta {
+  border-left-color: var(--cor-alta);
+}
+
+.tela-atendente .at-item-media {
+  border-left-color: var(--cor-media);
+}
+
+.tela-atendente .at-item-baixa {
+  border-left-color: var(--cor-baixa);
+}
+
+/* Ocorrência resolvida fica mais apagada: o foco é no que ainda precisa de atenção */
+.tela-atendente .at-item-resolvida {
+  opacity: 0.75;
+}
+
+.tela-atendente .at-item-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tela-atendente .at-item-data {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-item-titulo {
+  margin: 6px 0 2px;
+  font-weight: 600;
+}
+
+/* Descrição em uma linha só, com reticências quando for longa */
+.tela-atendente .at-item-descricao {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tela-atendente .at-item-solicitante {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
