@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import AvisoRegistro from './components/AvisoRegistro'
 import FormularioOcorrencia from './components/FormularioOcorrencia'
+import ListaOcorrencias from './components/ListaOcorrencias'
 import PainelPrioridades from './components/PainelPrioridades'
 import './atendente.css'
 
@@ -60,7 +61,7 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
         <div className="at-coluna-lista">
           <section className="at-cartao">
             <h2>Ocorrências</h2>
-            <p>{ocorrencias.length} ocorrências registradas.</p>
+            <ListaOcorrencias ocorrencias={ocorrencias} />
           </section>
         </div>
       </div>
