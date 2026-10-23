@@ -73,11 +73,31 @@ export function temFiltroAtivo(filtros) {
   )
 }
 
+// Dia local em que a data caiu, no formato 'AAAA-MM-DD' (o mesmo do <input type="date">).
+// Data inválida devolve texto vazio.
+function dataLocal(iso) {
+  const data = new Date(iso)
+  if (Number.isNaN(data.getTime())) return ''
+
+  const mes = String(data.getMonth() + 1).padStart(2, '0')
+  const dia = String(data.getDate()).padStart(2, '0')
+
+  return `${data.getFullYear()}-${mes}-${dia}`
+}
+
 // Aplica os filtros e devolve uma lista nova (a original não muda).
 export function filtrarOcorrencias(lista, filtros) {
   return lista.filter(o => {
     if (filtros.status !== '' && o.status !== filtros.status) return false
     if (filtros.tipo !== '' && o.tipo !== filtros.tipo) return false
+
+    // Período: compara o dia da abertura com o dia inicial e o final (inclusive)
+    if (filtros.dataInicio !== '' || filtros.dataFim !== '') {
+      const dia = dataLocal(o.abertaEm)
+      if (dia === '') return false
+      if (filtros.dataInicio !== '' && dia < filtros.dataInicio) return false
+      if (filtros.dataFim !== '' && dia > filtros.dataFim) return false
+    }
 
     return true
   })
