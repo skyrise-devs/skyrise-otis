@@ -72,3 +72,13 @@ export function temFiltroAtivo(filtros) {
     filtros.dataFim !== ''
   )
 }
+
+// Aplica os filtros e devolve uma lista nova (a original não muda).
+export function filtrarOcorrencias(lista, filtros) {
+  return lista.filter(o => {
+    if (filtros.status !== '' && o.status !== filtros.status) return false
+    if (filtros.tipo !== '' && o.tipo !== filtros.tipo) return false
+
+    return true
+  })
+}
