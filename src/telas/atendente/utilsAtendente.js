@@ -56,3 +56,19 @@ export function ordenarOcorrencias(lista) {
 
   return [...fila, ...resolvidas]
 }
+
+// Filtros da lista. Texto vazio = filtro desligado.
+// busca: texto livre · status / tipo: uma das chaves de STATUS / TIPOS
+// dataInicio / dataFim: 'AAAA-MM-DD' (o dia em que a ocorrência foi aberta)
+export const FILTROS_VAZIOS = { busca: '', status: '', tipo: '', dataInicio: '', dataFim: '' }
+
+// Há algum filtro ligado? (uma busca só com espaços não conta)
+export function temFiltroAtivo(filtros) {
+  return (
+    filtros.busca.trim() !== '' ||
+    filtros.status !== '' ||
+    filtros.tipo !== '' ||
+    filtros.dataInicio !== '' ||
+    filtros.dataFim !== ''
+  )
+}
