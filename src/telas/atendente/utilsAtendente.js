@@ -1,6 +1,6 @@
 // Funções de apoio da tela do atendente (P2):
 // formatar datas e aplicar busca + filtros na lista de ocorrências.
-import { ELEVADORES, filaDeAtendimento, validarOcorrencia } from '../../data/ocorrencias'
+import { ELEVADORES, PRIORIDADES, STATUS, TIPOS, buscarElevador, filaDeAtendimento, validarOcorrencia } from '../../data/ocorrencias'
 
 const CAMPOS = ['tipo', 'elevadorId', 'descricao', 'solicitante']
 
@@ -85,8 +85,33 @@ function dataLocal(iso) {
   return `${data.getFullYear()}-${mes}-${dia}`
 }
 
+// Minúsculas e sem acento: "Síndico", "SINDICO" e "sindico" viram a mesma palavra
+function normalizar(texto) {
+  return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+// Tudo o que o atendente pode digitar para achar uma ocorrência, num texto só
+function textoDeBusca(o) {
+  const elevador = buscarElevador(o.elevadorId)
+
+  return normalizar([
+    o.id,
+    TIPOS[o.tipo]?.rotulo,
+    PRIORIDADES[o.prioridade]?.rotulo,
+    STATUS[o.status]?.rotulo,
+    o.elevadorId,
+    elevador?.predio,
+    elevador?.endereco,
+    o.descricao,
+    o.solicitante,
+  ].join(' '))
+}
+
 // Aplica os filtros e devolve uma lista nova (a original não muda).
 export function filtrarOcorrencias(lista, filtros) {
+  // Busca com várias palavras: a ocorrência precisa ter todas (em qualquer ordem)
+  const termos = normalizar(filtros.busca).trim().split(' ').filter(t => t !== '')
+
   return lista.filter(o => {
     if (filtros.status !== '' && o.status !== filtros.status) return false
     if (filtros.tipo !== '' && o.tipo !== filtros.tipo) return false
@@ -97,6 +122,11 @@ export function filtrarOcorrencias(lista, filtros) {
       if (dia === '') return false
       if (filtros.dataInicio !== '' && dia < filtros.dataInicio) return false
       if (filtros.dataFim !== '' && dia > filtros.dataFim) return false
+    }
+
+    if (termos.length > 0) {
+      const alvo = textoDeBusca(o)
+      if (!termos.every(t => alvo.includes(t))) return false
     }
 
     return true
