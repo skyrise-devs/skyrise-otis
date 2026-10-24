@@ -12,6 +12,10 @@ function BarraFiltros({ filtros, onMudar }) {
     onMudar({ ...filtros, [e.target.name]: e.target.value })
   }
 
+  // Datas no formato AAAA-MM-DD podem ser comparadas como texto
+  const periodoInvalido =
+    filtros.dataInicio !== '' && filtros.dataFim !== '' && filtros.dataInicio > filtros.dataFim
+
   return (
     <div className="at-filtros" role="search">
       <label className="at-campo at-filtro-busca">
@@ -44,6 +48,22 @@ function BarraFiltros({ filtros, onMudar }) {
           ))}
         </select>
       </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Aberta a partir de</span>
+        <input type="date" name="dataInicio" value={filtros.dataInicio} onChange={atualizarFiltro} />
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Aberta até</span>
+        <input type="date" name="dataFim" value={filtros.dataFim} onChange={atualizarFiltro} />
+      </label>
+
+      {periodoInvalido && (
+        <p className="at-filtros-aviso" role="alert">
+          A data inicial está depois da data final. Ajuste o período para ver resultados.
+        </p>
+      )}
     </div>
   )
 }
