@@ -1,12 +1,12 @@
 // Busca por texto + filtros por status, tipo e data
 import { STATUS, TIPOS } from '../../../data/ocorrencias'
-import { ORDEM_DOS_TIPOS } from '../utilsAtendente'
+import { ORDEM_DOS_TIPOS, temFiltroAtivo } from '../utilsAtendente'
 
 // Do começo ao fim do atendimento
 const ORDEM_DOS_STATUS = ['aberta', 'em_atendimento', 'resolvida']
 
 // Os campos são controlados pela tela: ela guarda os filtros e passa por props
-function BarraFiltros({ filtros, onMudar }) {
+function BarraFiltros({ filtros, onMudar, onLimpar }) {
   // Um só handler: o name do campo diz qual filtro muda
   function atualizarFiltro(e) {
     onMudar({ ...filtros, [e.target.name]: e.target.value })
@@ -63,6 +63,12 @@ function BarraFiltros({ filtros, onMudar }) {
         <p className="at-filtros-aviso" role="alert">
           A data inicial está depois da data final. Ajuste o período para ver resultados.
         </p>
+      )}
+
+      {temFiltroAtivo(filtros) && (
+        <div className="at-filtros-acoes">
+          <button type="button" className="at-btn" onClick={onLimpar}>Limpar filtros</button>
+        </div>
       )}
     </div>
   )
