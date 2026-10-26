@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import AvisoRegistro from './components/AvisoRegistro'
+import BarraFiltros from './components/BarraFiltros'
 import FormularioOcorrencia from './components/FormularioOcorrencia'
 import ListaOcorrencias from './components/ListaOcorrencias'
 import PainelPrioridades from './components/PainelPrioridades'
+import { FILTROS_VAZIOS, filtrarOcorrencias, temFiltroAtivo } from './utilsAtendente'
 import './atendente.css'
 
 // P2 · Pedro Henrique
@@ -12,10 +14,15 @@ import './atendente.css'
 function TelaAtendente({ ocorrencias, onRegistrar }) {
   // Última ocorrência registrada (null = nenhum aviso na tela)
   const [registrada, setRegistrada] = useState(null)
+  // Busca e filtros: a lista é recalculada a cada mudança (reativo)
+  const [filtros, setFiltros] = useState(FILTROS_VAZIOS)
 
   // Contadores do resumo: calculados a cada render, a partir da lista recebida por props
   const abertas = ocorrencias.filter(o => o.status === 'aberta').length
   const criticasAtivas = ocorrencias.filter(o => o.prioridade === 'critica' && o.status !== 'resolvida').length
+
+  // O que aparece na lista depois da busca e dos filtros
+  const filtradas = filtrarOcorrencias(ocorrencias, filtros)
 
   // onRegistrar devolve a ocorrência criada: guardamos para mostrar o número dela
   function registrar(dados) {
@@ -61,7 +68,16 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
         <div className="at-coluna-lista">
           <section className="at-cartao">
             <h2>Ocorrências</h2>
-            <ListaOcorrencias ocorrencias={ocorrencias} />
+            <BarraFiltros
+              filtros={filtros}
+              onMudar={setFiltros}
+              onLimpar={() => setFiltros(FILTROS_VAZIOS)}
+            />
+            <ListaOcorrencias
+              ocorrencias={filtradas}
+              total={ocorrencias.length}
+              filtrando={temFiltroAtivo(filtros)}
+            />
           </section>
         </div>
       </div>
