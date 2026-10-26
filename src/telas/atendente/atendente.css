@@ -474,3 +474,52 @@
   display: flex;
   justify-content: flex-end;
 }
+
+/* Modal: fundo escuro cobrindo a tela e caixa branca no centro, com rolagem própria se for alta */
+.tela-atendente .at-modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--at-espaco);
+  background: rgba(27, 36, 48, 0.55);
+  overflow-y: auto;
+}
+
+.tela-atendente .at-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  max-height: 100%;
+  background: var(--cor-superficie);
+  border-radius: var(--raio);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tela-atendente .at-modal-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--at-espaco);
+  padding: 16px var(--at-espaco-grande);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-modal-cabecalho h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.tela-atendente .at-modal-fechar {
+  padding: 2px 12px;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.tela-atendente .at-modal-corpo {
+  padding: var(--at-espaco-grande);
+  overflow-y: auto;
+}
