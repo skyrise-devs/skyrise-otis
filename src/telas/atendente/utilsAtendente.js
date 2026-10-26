@@ -32,8 +32,10 @@ export function errosPorCampo(dados) {
 }
 
 // Data e hora no padrão brasileiro (ex.: 19/10/2026 11:05), no horário do navegador.
-// Se a data vier inválida, mostra um traço em vez de "NaN/NaN/NaN".
+// Se a data vier vazia ou inválida, mostra um traço em vez de "NaN/NaN/NaN" (ou de 1970).
 export function formatarData(iso) {
+  if (!iso) return '—'
+
   const data = new Date(iso)
   if (Number.isNaN(data.getTime())) return '—'
 
@@ -76,6 +78,8 @@ export function temFiltroAtivo(filtros) {
 // Dia local em que a data caiu, no formato 'AAAA-MM-DD' (o mesmo do <input type="date">).
 // Data inválida devolve texto vazio.
 function dataLocal(iso) {
+  if (!iso) return '—'
+
   const data = new Date(iso)
   if (Number.isNaN(data.getTime())) return ''
 
