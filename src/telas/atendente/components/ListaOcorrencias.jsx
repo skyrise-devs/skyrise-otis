@@ -4,7 +4,8 @@ import ItemOcorrencia from './ItemOcorrencia'
 
 // ocorrencias: as que devem aparecer (já filtradas) · total: quantas existem sem filtro
 // filtrando: há algum filtro ligado? (muda o contador e a mensagem de lista vazia)
-function ListaOcorrencias({ ocorrencias, total = ocorrencias.length, filtrando = false }) {
+// onAbrir: chamado com o id da ocorrência quando o atendente pede os detalhes
+function ListaOcorrencias({ ocorrencias, total = ocorrencias.length, filtrando = false, onAbrir }) {
   const ordenadas = ordenarOcorrencias(ocorrencias)
   const quantidade = ordenadas.length
 
@@ -28,7 +29,7 @@ function ListaOcorrencias({ ocorrencias, total = ocorrencias.length, filtrando =
       ) : (
         <ul className="at-lista-itens">
           {ordenadas.map(o => (
-            <ItemOcorrencia key={o.id} ocorrencia={o} />
+            <ItemOcorrencia key={o.id} ocorrencia={o} onAbrir={onAbrir} />
           ))}
         </ul>
       )}

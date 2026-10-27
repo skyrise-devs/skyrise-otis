@@ -4,7 +4,8 @@ import { formatarData } from '../utilsAtendente'
 import BadgePrioridade from './BadgePrioridade'
 import BadgeStatus from './BadgeStatus'
 
-function ItemOcorrencia({ ocorrencia }) {
+// onAbrir recebe o id da ocorrência; sem ele, o botão "Ver detalhes" não aparece
+function ItemOcorrencia({ ocorrencia, onAbrir }) {
   const elevador = buscarElevador(ocorrencia.elevadorId)
   const tipo = TIPOS[ocorrencia.tipo]?.rotulo ?? ocorrencia.tipo
   const local = elevador ? elevador.predio : ocorrencia.elevadorId
@@ -21,7 +22,20 @@ function ItemOcorrencia({ ocorrencia }) {
 
       <p className="at-item-titulo">{`${tipo} · ${local}`}</p>
       <p className="at-item-descricao">{ocorrencia.descricao}</p>
-      <small className="at-item-solicitante">{`Solicitante: ${ocorrencia.solicitante}`}</small>
+
+      <div className="at-item-rodape">
+        <small className="at-item-solicitante">{`Solicitante: ${ocorrencia.solicitante}`}</small>
+        {onAbrir && (
+          <button
+            type="button"
+            className="at-btn at-item-abrir"
+            onClick={() => onAbrir(ocorrencia.id)}
+            aria-label={`Ver detalhes da ocorrência ${ocorrencia.id}`}
+          >
+            Ver detalhes
+          </button>
+        )}
+      </div>
     </li>
   )
 }
