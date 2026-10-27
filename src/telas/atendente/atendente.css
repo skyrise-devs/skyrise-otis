@@ -523,3 +523,44 @@
   padding: var(--at-espaco-grande);
   overflow-y: auto;
 }
+
+/* Detalhes: selos no topo e dados em grade (rótulo pequeno em cima, valor embaixo) */
+.tela-atendente .at-detalhe-selos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--at-espaco);
+}
+
+.tela-atendente .at-detalhe-fura {
+  color: var(--cor-critica);
+  font-size: 14px;
+}
+
+.tela-atendente .at-detalhe-dados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--at-espaco);
+  margin: 0;
+}
+
+.tela-atendente .at-detalhe-dados dt {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.tela-atendente .at-detalhe-dados dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* Endereço e descrição ocupam a linha toda e são texto corrido, sem negrito */
+.tela-atendente .at-detalhe-largo {
+  grid-column: 1 / -1;
+}
+
+.tela-atendente .at-detalhe-largo dd {
+  font-weight: 400;
+}
