@@ -564,3 +564,18 @@
 .tela-atendente .at-detalhe-largo dd {
   font-weight: 400;
 }
+
+/* Rodapé do item: solicitante à esquerda e botão "Ver detalhes" à direita */
+.tela-atendente .at-item-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tela-atendente .at-item-abrir {
+  padding: 4px 12px;
+  font-size: 13px;
+}
