@@ -3,6 +3,7 @@ import AvisoRegistro from './components/AvisoRegistro'
 import BarraFiltros from './components/BarraFiltros'
 import FormularioOcorrencia from './components/FormularioOcorrencia'
 import ListaOcorrencias from './components/ListaOcorrencias'
+import ModalDetalhes from './components/ModalDetalhes'
 import PainelPrioridades from './components/PainelPrioridades'
 import { FILTROS_VAZIOS, filtrarOcorrencias, temFiltroAtivo } from './utilsAtendente'
 import './atendente.css'
@@ -16,6 +17,8 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
   const [registrada, setRegistrada] = useState(null)
   // Busca e filtros: a lista é recalculada a cada mudança (reativo)
   const [filtros, setFiltros] = useState(FILTROS_VAZIOS)
+  // Guardamos só o id da ocorrência aberta: o modal sempre mostra a versão mais nova dela
+  const [idAberto, setIdAberto] = useState(null)
 
   // Contadores do resumo: calculados a cada render, a partir da lista recebida por props
   const abertas = ocorrencias.filter(o => o.status === 'aberta').length
@@ -23,6 +26,9 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
 
   // O que aparece na lista depois da busca e dos filtros
   const filtradas = filtrarOcorrencias(ocorrencias, filtros)
+
+  // Ocorrência do modal (undefined = modal fechado)
+  const ocorrenciaAberta = ocorrencias.find(o => o.id === idAberto)
 
   // onRegistrar devolve a ocorrência criada: guardamos para mostrar o número dela
   function registrar(dados) {
@@ -77,10 +83,15 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
               ocorrencias={filtradas}
               total={ocorrencias.length}
               filtrando={temFiltroAtivo(filtros)}
+              onAbrir={setIdAberto}
             />
           </section>
         </div>
       </div>
+
+      {ocorrenciaAberta && (
+        <ModalDetalhes ocorrencia={ocorrenciaAberta} onFechar={() => setIdAberto(null)} />
+      )}
     </section>
   )
 }
