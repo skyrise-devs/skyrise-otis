@@ -6,10 +6,26 @@ import BadgePrioridade from './BadgePrioridade'
 
 const DADOS_VAZIOS = { tipo: '', elevadorId: '', descricao: '', solicitante: '' }
 
-// onSalvar recebe os dados do formulário quando eles estão válidos
-function FormularioOcorrencia({ onSalvar }) {
-  const [dados, setDados] = useState(DADOS_VAZIOS)
-  // Os erros só aparecem depois da primeira tentativa de registrar
+function estadoInicial(dadosIniciais) {
+  if (!dadosIniciais) return DADOS_VAZIOS
+
+  return {
+    tipo: dadosIniciais.tipo ?? '',
+    elevadorId: dadosIniciais.elevadorId ?? '',
+    descricao: dadosIniciais.descricao ?? '',
+    solicitante: dadosIniciais.solicitante ?? '',
+  }
+}
+
+// onSalvar recebe os dados válidos; dadosIniciais e onCancelar ativam o modo de edição
+function FormularioOcorrencia({
+  onSalvar,
+  dadosIniciais = null,
+  rotuloBotao = 'Registrar ocorrência',
+  onCancelar = null,
+}) {
+  const [dados, setDados] = useState(() => estadoInicial(dadosIniciais))
+  // Os erros só aparecem depois da primeira tentativa de salvar
   const [tentouEnviar, setTentouEnviar] = useState(false)
 
   // Elevador escolhido (undefined enquanto nenhum for selecionado)
@@ -35,9 +51,11 @@ function FormularioOcorrencia({ onSalvar }) {
 
     onSalvar(dados)
 
-    // Formulário limpo e pronto para o próximo chamado
-    setDados(DADOS_VAZIOS)
-    setTentouEnviar(false)
+    // Na criação, limpa o formulário para o próximo chamado
+    if (!dadosIniciais) {
+      setDados(DADOS_VAZIOS)
+      setTentouEnviar(false)
+    }
   }
 
   return (
@@ -110,7 +128,12 @@ function FormularioOcorrencia({ onSalvar }) {
       </label>
 
       <div className="at-form-acoes">
-        <button type="submit" className="at-btn at-btn-primario">Registrar ocorrência</button>
+        {onCancelar && (
+          <button type="button" className="at-btn" onClick={onCancelar}>
+            Cancelar
+          </button>
+        )}
+        <button type="submit" className="at-btn at-btn-primario">{rotuloBotao}</button>
       </div>
     </form>
   )
