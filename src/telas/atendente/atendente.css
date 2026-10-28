@@ -579,3 +579,31 @@
   padding: 4px 12px;
   font-size: 13px;
 }
+
+/* Linha do tempo: seção abaixo dos dados do modal, com trilha vertical à esquerda */
+.tela-atendente .at-historico {
+  margin-top: var(--at-espaco-grande);
+  padding-top: var(--at-espaco);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-historico h3 {
+  margin: 0 0 var(--at-espaco);
+  font-size: 16px;
+}
+
+.tela-atendente .at-linha-vazia {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.tela-atendente .at-linha-tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 0 16px;
+  border-left: 2px solid var(--cor-borda);
+  list-style: none;
+}
