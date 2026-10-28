@@ -607,3 +607,36 @@
   border-left: 2px solid var(--cor-borda);
   list-style: none;
 }
+
+/* Cada passo do histórico tem um ponto sobre a linha vertical, status, data e observação */
+.tela-atendente .at-linha-item {
+  position: relative;
+}
+
+.tela-atendente .at-linha-item::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -21px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cor-destaque);
+}
+
+.tela-atendente .at-linha-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tela-atendente .at-linha-data {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.tela-atendente .at-linha-obs {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
