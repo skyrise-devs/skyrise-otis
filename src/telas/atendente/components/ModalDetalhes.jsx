@@ -3,6 +3,7 @@ import { TIPOS, buscarElevador, buscarTecnico } from '../../../data/ocorrencias'
 import { formatarData } from '../utilsAtendente'
 import BadgePrioridade from './BadgePrioridade'
 import BadgeStatus from './BadgeStatus'
+import LinhaDoTempo from './LinhaDoTempo'
 import Modal from './Modal'
 
 function ModalDetalhes({ ocorrencia, onFechar }) {
@@ -66,6 +67,8 @@ function ModalDetalhes({ ocorrencia, onFechar }) {
           <dd>{ocorrencia.resolvidaEm ? formatarData(ocorrencia.resolvidaEm) : 'Ainda não resolvida'}</dd>
         </div>
       </dl>
+
+      <LinhaDoTempo historico={ocorrencia.historico} />
     </Modal>
   )
 }
