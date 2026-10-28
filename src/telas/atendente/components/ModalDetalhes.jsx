@@ -6,7 +6,7 @@ import BadgeStatus from './BadgeStatus'
 import LinhaDoTempo from './LinhaDoTempo'
 import Modal from './Modal'
 
-function ModalDetalhes({ ocorrencia, onFechar }) {
+function ModalDetalhes({ ocorrencia, onFechar, onEditar, onExcluir }) {
   const elevador = buscarElevador(ocorrencia.elevadorId)
   const tipo = TIPOS[ocorrencia.tipo]?.rotulo ?? ocorrencia.tipo
 
@@ -69,6 +69,21 @@ function ModalDetalhes({ ocorrencia, onFechar }) {
       </dl>
 
       <LinhaDoTempo historico={ocorrencia.historico} />
+
+      {(onEditar || onExcluir) && (
+        <div className="at-detalhe-acoes">
+          {onEditar && (
+            <button type="button" className="at-btn" onClick={() => onEditar(ocorrencia.id, {})}>
+              Editar dados
+            </button>
+          )}
+          {onExcluir && (
+            <button type="button" className="at-btn at-btn-perigo" onClick={() => onExcluir(ocorrencia.id)}>
+              Excluir ocorrência
+            </button>
+          )}
+        </div>
+      )}
     </Modal>
   )
 }
