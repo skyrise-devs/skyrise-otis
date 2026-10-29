@@ -5,7 +5,14 @@ import ItemOcorrencia from './ItemOcorrencia'
 // ocorrencias: as que devem aparecer (já filtradas) · total: quantas existem sem filtro
 // filtrando: há algum filtro ligado? (muda o contador e a mensagem de lista vazia)
 // onAbrir: chamado com o id da ocorrência quando o atendente pede os detalhes
-function ListaOcorrencias({ ocorrencias, total = ocorrencias.length, filtrando = false, onAbrir }) {
+// onLimparFiltros: atalho no estado vazio quando a busca não retorna resultados
+function ListaOcorrencias({
+  ocorrencias,
+  total = ocorrencias.length,
+  filtrando = false,
+  onAbrir,
+  onLimparFiltros,
+}) {
   const ordenadas = ordenarOcorrencias(ocorrencias)
   const quantidade = ordenadas.length
 
@@ -21,11 +28,18 @@ function ListaOcorrencias({ ocorrencias, total = ocorrencias.length, filtrando =
       </p>
 
       {quantidade === 0 ? (
-        <p className="at-lista-vazia">
-          {filtrando
-            ? 'Nenhuma ocorrência encontrada com esses filtros. Tente outro termo ou limpe os filtros.'
-            : 'Nenhuma ocorrência por aqui ainda. Registre a primeira no formulário.'}
-        </p>
+        <div className="at-lista-vazia">
+          <p>
+            {filtrando
+              ? 'Nenhuma ocorrência encontrada com esses filtros. Tente outro termo ou limpe os filtros.'
+              : 'Nenhuma ocorrência por aqui ainda. Registre a primeira no formulário.'}
+          </p>
+          {filtrando && onLimparFiltros && (
+            <button type="button" className="at-btn" onClick={onLimparFiltros}>
+              Limpar filtros
+            </button>
+          )}
+        </div>
       ) : (
         <ul className="at-lista-itens">
           {ordenadas.map(o => (

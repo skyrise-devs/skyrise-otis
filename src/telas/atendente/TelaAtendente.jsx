@@ -40,6 +40,10 @@ function TelaAtendente({ ocorrencias, onRegistrar, onEditar, onExcluir }) {
     onExcluir(id)
   }
 
+  function limparFiltros() {
+    setFiltros(FILTROS_VAZIOS)
+  }
+
   return (
     <section className="tela-atendente">
       <header className="at-cabecalho">
@@ -65,7 +69,11 @@ function TelaAtendente({ ocorrencias, onRegistrar, onEditar, onExcluir }) {
       <div className="at-colunas">
         <div className="at-coluna-form">
           {registrada && (
-            <AvisoRegistro ocorrencia={registrada} onFechar={() => setRegistrada(null)} />
+            <AvisoRegistro
+              ocorrencia={registrada}
+              onAbrir={setIdAberto}
+              onFechar={() => setRegistrada(null)}
+            />
           )}
 
           <section className="at-cartao">
@@ -82,13 +90,14 @@ function TelaAtendente({ ocorrencias, onRegistrar, onEditar, onExcluir }) {
             <BarraFiltros
               filtros={filtros}
               onMudar={setFiltros}
-              onLimpar={() => setFiltros(FILTROS_VAZIOS)}
+              onLimpar={limparFiltros}
             />
             <ListaOcorrencias
               ocorrencias={filtradas}
               total={ocorrencias.length}
               filtrando={temFiltroAtivo(filtros)}
               onAbrir={setIdAberto}
+              onLimparFiltros={limparFiltros}
             />
           </section>
         </div>
