@@ -690,3 +690,15 @@
   border-color: var(--cor-destaque);
   box-shadow: var(--at-sombra);
 }
+
+/* Estado vazio com texto e botão centralizados */
+.tela-atendente .at-lista-vazia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tela-atendente .at-lista-vazia p {
+  margin: 0;
+}
