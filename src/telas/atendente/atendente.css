@@ -651,3 +651,25 @@
   padding-top: var(--at-espaco);
   border-top: 1px solid var(--cor-borda);
 }
+
+/* Caixa de confirmação de exclusão: destaque em vermelho claro para evitar cliques por engano */
+.tela-atendente .at-confirmacao-exclusao {
+  margin-top: var(--at-espaco-grande);
+  padding: var(--at-espaco);
+  border: 1px solid var(--cor-critica);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: rgba(198, 40, 40, 0.06);
+}
+
+.tela-atendente .at-confirmacao-exclusao p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.tela-atendente .at-confirmacao-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
