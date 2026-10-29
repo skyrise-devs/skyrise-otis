@@ -680,3 +680,13 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* Item clicável: mostra cursor de mão e realça a borda ao passar o mouse */
+.tela-atendente .at-item-clicavel {
+  cursor: pointer;
+}
+
+.tela-atendente .at-item-clicavel:hover {
+  border-color: var(--cor-destaque);
+  box-shadow: var(--at-sombra);
+}
