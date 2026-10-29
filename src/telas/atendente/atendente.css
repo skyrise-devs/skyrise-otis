@@ -640,3 +640,14 @@
   margin: 4px 0 0;
   font-size: 14px;
 }
+
+/* Rodapé de ações do modal de detalhes: botões de editar e excluir */
+.tela-atendente .at-detalhe-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: var(--at-espaco-grande);
+  padding-top: var(--at-espaco);
+  border-top: 1px solid var(--cor-borda);
+}
