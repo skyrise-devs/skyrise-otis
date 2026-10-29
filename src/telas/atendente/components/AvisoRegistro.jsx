@@ -1,7 +1,7 @@
 // Confirmação exibida depois de registrar: número da ocorrência e o que acontece com ela
 import BadgePrioridade from './BadgePrioridade'
 
-function AvisoRegistro({ ocorrencia, onFechar }) {
+function AvisoRegistro({ ocorrencia, onAbrir, onFechar }) {
   const ehCritica = ocorrencia.prioridade === 'critica'
 
   return (
@@ -16,7 +16,14 @@ function AvisoRegistro({ ocorrencia, onFechar }) {
         </p>
       </div>
 
-      <button type="button" className="at-btn" onClick={onFechar}>Fechar</button>
+      <div className="at-aviso-acoes">
+        {onAbrir && (
+          <button type="button" className="at-btn" onClick={() => onAbrir(ocorrencia.id)}>
+            Ver detalhes
+          </button>
+        )}
+        <button type="button" className="at-btn" onClick={onFechar}>Fechar</button>
+      </div>
     </div>
   )
 }
