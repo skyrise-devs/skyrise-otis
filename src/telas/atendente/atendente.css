@@ -673,3 +673,10 @@
   justify-content: flex-end;
   gap: 10px;
 }
+
+/* Botões do aviso de registro alinhados lado a lado */
+.tela-atendente .at-aviso-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
