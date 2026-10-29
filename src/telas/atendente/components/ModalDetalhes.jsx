@@ -10,6 +10,7 @@ import Modal from './Modal'
 
 function ModalDetalhes({ ocorrencia, onFechar, onEditar, onExcluir }) {
   const [editando, setEditando] = useState(false)
+  const [confirmandoExclusao, setConfirmandoExclusao] = useState(false)
 
   const elevador = buscarElevador(ocorrencia.elevadorId)
   const tipo = TIPOS[ocorrencia.tipo]?.rotulo ?? ocorrencia.tipo
@@ -26,6 +27,11 @@ function ModalDetalhes({ ocorrencia, onFechar, onEditar, onExcluir }) {
   function salvarEdicao(mudancas) {
     onEditar(ocorrencia.id, mudancas)
     setEditando(false)
+  }
+
+  function confirmarExclusao() {
+    onExcluir(ocorrencia.id)
+    onFechar()
   }
 
   return (
@@ -91,19 +97,48 @@ function ModalDetalhes({ ocorrencia, onFechar, onEditar, onExcluir }) {
 
           <LinhaDoTempo historico={ocorrencia.historico} />
 
-          {(onEditar || onExcluir) && (
-            <div className="at-detalhe-acoes">
-              {onEditar && (
-                <button type="button" className="at-btn" onClick={() => setEditando(true)}>
-                  Editar dados
+          {confirmandoExclusao ? (
+            <div className="at-confirmacao-exclusao" role="alert">
+              <p>
+                Tem certeza de que deseja excluir a ocorrência <strong>{ocorrencia.id}</strong>?
+                Esta ação não pode ser desfeita.
+              </p>
+              <div className="at-confirmacao-botoes">
+                <button
+                  type="button"
+                  className="at-btn"
+                  onClick={() => setConfirmandoExclusao(false)}
+                >
+                  Manter ocorrência
                 </button>
-              )}
-              {onExcluir && (
-                <button type="button" className="at-btn at-btn-perigo" onClick={() => onExcluir(ocorrencia.id)}>
-                  Excluir ocorrência
+                <button
+                  type="button"
+                  className="at-btn at-btn-perigo"
+                  onClick={confirmarExclusao}
+                >
+                  Sim, excluir ocorrência
                 </button>
-              )}
+              </div>
             </div>
+          ) : (
+            (onEditar || onExcluir) && (
+              <div className="at-detalhe-acoes">
+                {onEditar && (
+                  <button type="button" className="at-btn" onClick={() => setEditando(true)}>
+                    Editar dados
+                  </button>
+                )}
+                {onExcluir && (
+                  <button
+                    type="button"
+                    className="at-btn at-btn-perigo"
+                    onClick={() => setConfirmandoExclusao(true)}
+                  >
+                    Excluir ocorrência
+                  </button>
+                )}
+              </div>
+            )
           )}
         </>
       )}
