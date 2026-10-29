@@ -9,10 +9,9 @@ import { FILTROS_VAZIOS, filtrarOcorrencias, temFiltroAtivo } from './utilsAtend
 import './atendente.css'
 
 // P2 · Pedro Henrique
-// A fazer: formulário de abertura (use validarOcorrencia + onRegistrar),
-// lista com busca e filtros, e a tela de detalhe com o histórico
-// (para corrigir uma ocorrência, use onEditar).
-function TelaAtendente({ ocorrencias, onRegistrar }) {
+// Portal do Atendente: abertura de ocorrências com prioridade automática,
+// busca e filtros reativos, e modal de detalhes com linha do tempo, edição e exclusão.
+function TelaAtendente({ ocorrencias, onRegistrar, onEditar, onExcluir }) {
   // Última ocorrência registrada (null = nenhum aviso na tela)
   const [registrada, setRegistrada] = useState(null)
   // Busca e filtros: a lista é recalculada a cada mudança (reativo)
@@ -33,6 +32,12 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
   // onRegistrar devolve a ocorrência criada: guardamos para mostrar o número dela
   function registrar(dados) {
     setRegistrada(onRegistrar(dados))
+  }
+
+  // Se excluir a ocorrência que estava no aviso de recém-registrada, esconde o aviso
+  function excluir(id) {
+    if (registrada?.id === id) setRegistrada(null)
+    onExcluir(id)
   }
 
   return (
@@ -90,7 +95,12 @@ function TelaAtendente({ ocorrencias, onRegistrar }) {
       </div>
 
       {ocorrenciaAberta && (
-        <ModalDetalhes ocorrencia={ocorrenciaAberta} onFechar={() => setIdAberto(null)} />
+        <ModalDetalhes
+          ocorrencia={ocorrenciaAberta}
+          onFechar={() => setIdAberto(null)}
+          onEditar={onEditar}
+          onExcluir={excluir}
+        />
       )}
     </section>
   )
