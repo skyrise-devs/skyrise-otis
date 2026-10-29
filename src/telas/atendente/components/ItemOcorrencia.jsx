@@ -11,8 +11,15 @@ function ItemOcorrencia({ ocorrencia, onAbrir }) {
   const local = elevador ? elevador.predio : ocorrencia.elevadorId
   const resolvida = ocorrencia.status === 'resolvida'
 
+  const classes = [
+    'at-item',
+    `at-item-${ocorrencia.prioridade}`,
+    resolvida ? 'at-item-resolvida' : '',
+    onAbrir ? 'at-item-clicavel' : '',
+  ].filter(Boolean).join(' ')
+
   return (
-    <li className={`at-item at-item-${ocorrencia.prioridade}${resolvida ? ' at-item-resolvida' : ''}`}>
+    <li className={classes} onClick={onAbrir ? () => onAbrir(ocorrencia.id) : undefined}>
       <div className="at-item-topo">
         <strong className="at-item-id">{ocorrencia.id}</strong>
         <BadgePrioridade prioridade={ocorrencia.prioridade} />
@@ -29,7 +36,10 @@ function ItemOcorrencia({ ocorrencia, onAbrir }) {
           <button
             type="button"
             className="at-btn at-item-abrir"
-            onClick={() => onAbrir(ocorrencia.id)}
+            onClick={e => {
+              e.stopPropagation()
+              onAbrir(ocorrencia.id)
+            }}
             aria-label={`Ver detalhes da ocorrência ${ocorrencia.id}`}
           >
             Ver detalhes
