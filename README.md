@@ -162,7 +162,7 @@ npm run build
 
 | Data | Entrega |
 |---|---|
-| 10/11/2026 | Sprint 2: MVP + deploy + vídeo pitch (meta do time: enviar até 08/11) |
+| 27/11/2026 | Sprint 2: MVP + deploy + vídeo pitch (meta do time: enviar até 25/11) |
 | A definir (Teams) | Seletiva, 2ª mentoria e Banca Final |
 
 ## Links
