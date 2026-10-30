@@ -131,7 +131,7 @@ npm run build
 |---|---|---|---|---|
 | P1 | Pedro Zigiotto | [@DevPedroZigi](https://github.com/DevPedroZigi) | Dados, regras e deploy | `p1-dados` |
 | P2 | Pedro Henrique | [@phthedevx](https://github.com/phthedevx) | Tela do atendente + slides da banca | `p2-atendente` |
-| P3 | Julia Rubio | [@Jurubioo2007](https://github.com/Jurubioo2007) | Tela do técnico + navegação | `p3-tecnico` |
+| P3 | Julia Rubio | [@Jurubioo](https://github.com/Jurubioo) | Tela do técnico + navegação | `p3-tecnico` |
 | P4 | Thiago Cunha | [@tcunha2004](https://github.com/tcunha2004) | Dashboard da gestão | `p4-dashboard` |
 | P5 | Gabriela Donato | [@Gabidonaato](https://github.com/Gabidonaato) | Identidade visual, vídeo e entrega | `p5-visual` |
 
@@ -162,7 +162,7 @@ npm run build
 
 | Data | Entrega |
 |---|---|
-| 10/11/2026 | Sprint 2: MVP + deploy + vídeo pitch (meta do time: enviar até 08/11) |
+| 27/11/2026 | Sprint 2: MVP + deploy + vídeo pitch (meta do time: enviar até 25/11) |
 | A definir (Teams) | Seletiva, 2ª mentoria e Banca Final |
 
 ## Links
