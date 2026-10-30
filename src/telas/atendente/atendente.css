@@ -2,3 +2,703 @@
 .tela-atendente h1 {
   margin-top: 0;
 }
+
+/* Container e variáveis locais da tela.
+   Tudo fica dentro de .tela-atendente (e com prefixo at-) porque o CSS do React
+   é global: sem isso, os estilos vazariam para as telas do técnico e da gestão. */
+.tela-atendente {
+  --at-espaco: 16px;
+  --at-espaco-grande: 24px;
+  --at-sombra: 0 1px 3px rgba(27, 36, 48, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco-grande);
+}
+
+/* Cabeçalho da tela */
+.tela-atendente .at-cabecalho h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.tela-atendente .at-cabecalho p {
+  margin: 0;
+  color: var(--cor-texto-suave);
+}
+
+/* Cartão: caixa branca usada em cada seção (formulário, lista, detalhes) */
+.tela-atendente .at-cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--at-sombra);
+  padding: var(--at-espaco-grande);
+}
+
+.tela-atendente .at-cartao h2 {
+  margin: 0 0 var(--at-espaco);
+  font-size: 20px;
+}
+
+/* Botões: base + variações (primário, perigo) */
+.tela-atendente .at-btn {
+  font: inherit;
+  padding: 8px 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  cursor: pointer;
+}
+
+.tela-atendente .at-btn:hover {
+  border-color: var(--cor-destaque);
+}
+
+.tela-atendente .at-btn:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.tela-atendente .at-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tela-atendente .at-btn-primario {
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  color: #fff;
+}
+
+.tela-atendente .at-btn-primario:hover {
+  filter: brightness(1.1);
+}
+
+.tela-atendente .at-btn-perigo {
+  border-color: var(--cor-critica);
+  color: var(--cor-critica);
+}
+
+.tela-atendente .at-btn-perigo:hover {
+  background: var(--cor-critica);
+  color: #fff;
+}
+
+/* Duas colunas (formulário | lista) com flexbox; em tela estreita quebram em linhas */
+.tela-atendente .at-colunas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--at-espaco-grande);
+}
+
+.tela-atendente .at-coluna-form {
+  flex: 1 1 340px;
+}
+
+.tela-atendente .at-coluna-lista {
+  flex: 2 1 480px;
+  min-width: 0;
+}
+
+/* Resumo no topo: quantas ocorrências, quantas abertas e quantas críticas */
+.tela-atendente .at-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--at-espaco);
+}
+
+.tela-atendente .at-resumo-item {
+  flex: 1 1 160px;
+  padding: var(--at-espaco);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--at-sombra);
+}
+
+.tela-atendente .at-resumo-numero {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tela-atendente .at-resumo-rotulo {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-resumo-item.critico .at-resumo-numero {
+  color: var(--cor-critica);
+}
+
+/* Badge de prioridade: as cores vêm das variáveis do index.css.
+   O texto sempre aparece (não depende só da cor) e a média usa texto escuro por causa do amarelo. */
+.tela-atendente .at-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.tela-atendente .at-badge-critica {
+  background: var(--cor-critica);
+}
+
+.tela-atendente .at-badge-alta {
+  background: var(--cor-alta);
+}
+
+.tela-atendente .at-badge-media {
+  background: var(--cor-media);
+  color: var(--cor-texto);
+}
+
+.tela-atendente .at-badge-baixa {
+  background: var(--cor-baixa);
+}
+
+/* Painel de prioridades: uma linha por tipo, com o badge de largura fixa à esquerda */
+.tela-atendente .at-painel-prioridades p {
+  margin: 0 0 var(--at-espaco);
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.tela-atendente .at-lista-prioridades {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tela-atendente .at-lista-prioridades li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-lista-prioridades li:last-child {
+  border-bottom: none;
+}
+
+.tela-atendente .at-lista-prioridades .at-badge {
+  flex: 0 0 84px;
+  text-align: center;
+}
+
+.tela-atendente .at-tipo-rotulo {
+  display: block;
+  font-weight: 600;
+}
+
+.tela-atendente .at-tipo-dica {
+  display: block;
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+/* Aviso de "fura fila": faixa vermelha clara, ligada à cor da prioridade crítica */
+.tela-atendente .at-painel-prioridades .at-aviso-fila {
+  margin: var(--at-espaco) 0 0;
+  padding: 10px 12px;
+  border-left: 4px solid var(--cor-critica);
+  border-radius: 4px;
+  background: rgba(198, 40, 40, 0.08);
+  color: var(--cor-texto);
+}
+
+/* A coluna do formulário agora tem mais de um cartão: empilha com espaço entre eles */
+.tela-atendente .at-coluna-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco-grande);
+}
+
+/* Formulário: cada campo é um label com o texto em cima e o controle embaixo */
+.tela-atendente .at-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco);
+}
+
+.tela-atendente .at-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tela-atendente .at-campo-rotulo {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tela-atendente .at-campo input,
+.tela-atendente .at-campo select,
+.tela-atendente .at-campo textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.tela-atendente .at-campo textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.tela-atendente .at-campo input:focus,
+.tela-atendente .at-campo select:focus,
+.tela-atendente .at-campo textarea:focus {
+  border-color: var(--cor-destaque);
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 1px;
+}
+
+/* Área dos botões do formulário: alinhados à direita (o modo de edição terá dois botões) */
+.tela-atendente .at-form-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* Texto de apoio embaixo de um campo (ex.: endereço do elevador escolhido) */
+.tela-atendente .at-campo-dica {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+/* Campo com problema: borda e mensagem em vermelho (a mensagem diz o que fazer, sem culpar o usuário) */
+.tela-atendente .at-campo-invalido input,
+.tela-atendente .at-campo-invalido select,
+.tela-atendente .at-campo-invalido textarea {
+  border-color: var(--cor-critica);
+}
+
+.tela-atendente .at-campo-erro {
+  color: var(--cor-critica);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Aviso "Prioridade desta ocorrência: [CRÍTICA] fura a fila do técnico" embaixo do select de tipo */
+.tela-atendente .at-prioridade-aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-prioridade-aviso strong {
+  color: var(--cor-critica);
+}
+
+/* Confirmação de registro: faixa verde, ligada à cor da prioridade baixa */
+.tela-atendente .at-aviso-registro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--cor-baixa);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: rgba(46, 125, 50, 0.08);
+}
+
+.tela-atendente .at-aviso-registro p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+/* Badge de status: tons de azul e cinza, para não ser confundido com as cores de prioridade */
+.tela-atendente .at-status {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tela-atendente .at-status-aberta {
+  color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+
+.tela-atendente .at-status-em_atendimento {
+  background: var(--cor-destaque);
+  color: #fff;
+}
+
+.tela-atendente .at-status-resolvida {
+  background: var(--cor-fundo);
+  border-color: var(--cor-borda);
+  color: var(--cor-texto-suave);
+}
+
+/* Item da lista: cartão com uma faixa colorida à esquerda, na cor da prioridade */
+.tela-atendente .at-item {
+  padding: 12px 16px;
+  border: 1px solid var(--cor-borda);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+.tela-atendente .at-item-critica {
+  border-left-color: var(--cor-critica);
+}
+
+.tela-atendente .at-item-alta {
+  border-left-color: var(--cor-alta);
+}
+
+.tela-atendente .at-item-media {
+  border-left-color: var(--cor-media);
+}
+
+.tela-atendente .at-item-baixa {
+  border-left-color: var(--cor-baixa);
+}
+
+/* Ocorrência resolvida fica mais apagada: o foco é no que ainda precisa de atenção */
+.tela-atendente .at-item-resolvida {
+  opacity: 0.75;
+}
+
+.tela-atendente .at-item-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tela-atendente .at-item-data {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.tela-atendente .at-item-titulo {
+  margin: 6px 0 2px;
+  font-weight: 600;
+}
+
+/* Descrição em uma linha só, com reticências quando for longa */
+.tela-atendente .at-item-descricao {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tela-atendente .at-item-solicitante {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+/* Lista: itens empilhados com espaço, contador no topo e caixa tracejada quando estiver vazia */
+.tela-atendente .at-lista-contador {
+  margin: 0 0 var(--at-espaco);
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.tela-atendente .at-lista-itens {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tela-atendente .at-lista-vazia {
+  margin: 0;
+  padding: 24px;
+  border: 1px dashed var(--cor-borda);
+  border-radius: var(--raio);
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+/* Barra de filtros: campos lado a lado, quebrando de linha em tela estreita.
+   A busca ocupa mais espaço que os outros campos. */
+.tela-atendente .at-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--at-espaco);
+  margin-bottom: var(--at-espaco);
+  padding-bottom: var(--at-espaco);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-filtros .at-campo {
+  flex: 1 1 150px;
+}
+
+.tela-atendente .at-filtros .at-filtro-busca {
+  flex: 1 1 100%;
+}
+
+.tela-atendente .at-filtros-aviso {
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--cor-critica);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tela-atendente .at-filtros-acoes {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Modal: fundo escuro cobrindo a tela e caixa branca no centro, com rolagem própria se for alta */
+.tela-atendente .at-modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--at-espaco);
+  background: rgba(27, 36, 48, 0.55);
+  overflow-y: auto;
+}
+
+.tela-atendente .at-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  max-height: 100%;
+  background: var(--cor-superficie);
+  border-radius: var(--raio);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tela-atendente .at-modal-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--at-espaco);
+  padding: 16px var(--at-espaco-grande);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-modal-cabecalho h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.tela-atendente .at-modal-fechar {
+  padding: 2px 12px;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.tela-atendente .at-modal-corpo {
+  padding: var(--at-espaco-grande);
+  overflow-y: auto;
+}
+
+/* Detalhes: selos no topo e dados em grade (rótulo pequeno em cima, valor embaixo) */
+.tela-atendente .at-detalhe-selos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--at-espaco);
+}
+
+.tela-atendente .at-detalhe-fura {
+  color: var(--cor-critica);
+  font-size: 14px;
+}
+
+.tela-atendente .at-detalhe-dados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--at-espaco);
+  margin: 0;
+}
+
+.tela-atendente .at-detalhe-dados dt {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.tela-atendente .at-detalhe-dados dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* Endereço e descrição ocupam a linha toda e são texto corrido, sem negrito */
+.tela-atendente .at-detalhe-largo {
+  grid-column: 1 / -1;
+}
+
+.tela-atendente .at-detalhe-largo dd {
+  font-weight: 400;
+}
+
+/* Rodapé do item: solicitante à esquerda e botão "Ver detalhes" à direita */
+.tela-atendente .at-item-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tela-atendente .at-item-abrir {
+  padding: 4px 12px;
+  font-size: 13px;
+}
+
+/* Linha do tempo: seção abaixo dos dados do modal, com trilha vertical à esquerda */
+.tela-atendente .at-historico {
+  margin-top: var(--at-espaco-grande);
+  padding-top: var(--at-espaco);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.tela-atendente .at-historico h3 {
+  margin: 0 0 var(--at-espaco);
+  font-size: 16px;
+}
+
+.tela-atendente .at-linha-vazia {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.tela-atendente .at-linha-tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 0 16px;
+  border-left: 2px solid var(--cor-borda);
+  list-style: none;
+}
+
+/* Cada passo do histórico tem um ponto sobre a linha vertical, status, data e observação */
+.tela-atendente .at-linha-item {
+  position: relative;
+}
+
+.tela-atendente .at-linha-item::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -21px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cor-destaque);
+}
+
+.tela-atendente .at-linha-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tela-atendente .at-linha-data {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.tela-atendente .at-linha-obs {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+/* Rodapé de ações do modal de detalhes: botões de editar e excluir */
+.tela-atendente .at-detalhe-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: var(--at-espaco-grande);
+  padding-top: var(--at-espaco);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* Caixa de confirmação de exclusão: destaque em vermelho claro para evitar cliques por engano */
+.tela-atendente .at-confirmacao-exclusao {
+  margin-top: var(--at-espaco-grande);
+  padding: var(--at-espaco);
+  border: 1px solid var(--cor-critica);
+  border-left-width: 4px;
+  border-radius: var(--raio);
+  background: rgba(198, 40, 40, 0.06);
+}
+
+.tela-atendente .at-confirmacao-exclusao p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.tela-atendente .at-confirmacao-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Botões do aviso de registro alinhados lado a lado */
+.tela-atendente .at-aviso-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Item clicável: mostra cursor de mão e realça a borda ao passar o mouse */
+.tela-atendente .at-item-clicavel {
+  cursor: pointer;
+}
+
+.tela-atendente .at-item-clicavel:hover {
+  border-color: var(--cor-destaque);
+  box-shadow: var(--at-sombra);
+}
+
+/* Estado vazio com texto e botão centralizados */
+.tela-atendente .at-lista-vazia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tela-atendente .at-lista-vazia p {
+  margin: 0;
+}
