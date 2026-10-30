@@ -1,4 +1,3 @@
-// Detalhes da ocorrência: dados, linha do tempo e botões Editar / Excluir
 import { useState } from 'react'
 import { TIPOS, buscarElevador, buscarTecnico } from '../../../data/ocorrencias'
 import { formatarData } from '../utilsAtendente'
@@ -15,13 +14,11 @@ function ModalDetalhes({ ocorrencia, onFechar, onEditar, onExcluir }) {
   const elevador = buscarElevador(ocorrencia.elevadorId)
   const tipo = TIPOS[ocorrencia.tipo]?.rotulo ?? ocorrencia.tipo
 
-  // Se o técnico não for encontrado, mostra o código dele em vez de deixar em branco
   let nomeTecnico = 'Ainda sem técnico'
   if (ocorrencia.tecnicoId) {
     nomeTecnico = buscarTecnico(ocorrencia.tecnicoId)?.nome ?? ocorrencia.tecnicoId
   }
 
-  // Só faz sentido avisar do "fura fila" enquanto a ocorrência não foi resolvida
   const furaFila = ocorrencia.prioridade === 'critica' && ocorrencia.status !== 'resolvida'
 
   function salvarEdicao(mudancas) {

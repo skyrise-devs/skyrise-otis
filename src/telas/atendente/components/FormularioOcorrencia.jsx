@@ -1,4 +1,3 @@
-// Formulário de abertura de ocorrência (também usado para corrigir os dados)
 import { useState } from 'react'
 import { TIPOS, ELEVADORES, buscarElevador, calcularPrioridade, validarOcorrencia } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS, errosPorCampo } from '../utilsAtendente'
@@ -17,7 +16,6 @@ function estadoInicial(dadosIniciais) {
   }
 }
 
-// onSalvar recebe os dados válidos; dadosIniciais e onCancelar ativam o modo de edição
 function FormularioOcorrencia({
   onSalvar,
   dadosIniciais = null,
@@ -25,19 +23,14 @@ function FormularioOcorrencia({
   onCancelar = null,
 }) {
   const [dados, setDados] = useState(() => estadoInicial(dadosIniciais))
-  // Os erros só aparecem depois da primeira tentativa de salvar
   const [tentouEnviar, setTentouEnviar] = useState(false)
 
-  // Elevador escolhido (undefined enquanto nenhum for selecionado)
   const elevador = buscarElevador(dados.elevadorId)
 
-  // Prioridade que o sistema vai dar a esta ocorrência (vazia enquanto não houver tipo)
   const prioridade = dados.tipo ? calcularPrioridade(dados.tipo) : ''
 
-  // Calculado a cada render a partir dos dados: o erro some assim que o campo é corrigido
   const erros = tentouEnviar ? errosPorCampo(dados) : {}
 
-  // Um só handler para todos os campos: o name do campo diz qual chave do objeto muda
   function atualizarCampo(e) {
     setDados({ ...dados, [e.target.name]: e.target.value })
   }
@@ -46,12 +39,10 @@ function FormularioOcorrencia({
     e.preventDefault()
     setTentouEnviar(true)
 
-    // Lista vazia = pode salvar
     if (validarOcorrencia(dados).length > 0) return
 
     onSalvar(dados)
 
-    // Na criação, limpa o formulário para o próximo chamado
     if (!dadosIniciais) {
       setDados(DADOS_VAZIOS)
       setTentouEnviar(false)

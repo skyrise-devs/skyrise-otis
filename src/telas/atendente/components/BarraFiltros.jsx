@@ -1,18 +1,13 @@
-// Busca por texto + filtros por status, tipo e data
 import { STATUS, TIPOS } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS, temFiltroAtivo } from '../utilsAtendente'
 
-// Do começo ao fim do atendimento
 const ORDEM_DOS_STATUS = ['aberta', 'em_atendimento', 'resolvida']
 
-// Os campos são controlados pela tela: ela guarda os filtros e passa por props
 function BarraFiltros({ filtros, onMudar, onLimpar }) {
-  // Um só handler: o name do campo diz qual filtro muda
   function atualizarFiltro(e) {
     onMudar({ ...filtros, [e.target.name]: e.target.value })
   }
 
-  // Datas no formato AAAA-MM-DD podem ser comparadas como texto
   const periodoInvalido =
     filtros.dataInicio !== '' && filtros.dataFim !== '' && filtros.dataInicio > filtros.dataFim
 

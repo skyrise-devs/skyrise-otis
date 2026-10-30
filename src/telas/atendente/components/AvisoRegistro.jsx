@@ -1,4 +1,3 @@
-// Confirmação exibida depois de registrar: número da ocorrência e o que acontece com ela
 import BadgePrioridade from './BadgePrioridade'
 
 function AvisoRegistro({ ocorrencia, onAbrir, onFechar }) {

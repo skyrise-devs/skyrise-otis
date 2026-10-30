@@ -1,4 +1,3 @@
-// Histórico da ocorrência em ordem cronológica (status, data e observação)
 import { formatarData } from '../utilsAtendente'
 import BadgeStatus from './BadgeStatus'
 

@@ -1,9 +1,7 @@
-// Legenda das regras: tipo de ocorrência → prioridade (passageiro preso fura a fila)
 import { TIPOS } from '../../../data/ocorrencias'
 import { ORDEM_DOS_TIPOS } from '../utilsAtendente'
 import BadgePrioridade from './BadgePrioridade'
 
-// Ajuda o atendente a escolher o tipo certo (e, com ele, a prioridade certa)
 const DICAS = {
   passageiro_preso: 'Há pessoas dentro da cabine sem conseguir sair.',
   falha_tecnica: 'O elevador funciona com defeito: porta, ruído, nível ou botoeira.',

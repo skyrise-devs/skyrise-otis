@@ -1,10 +1,8 @@
-// Uma linha da lista: número, tipo, prédio, prioridade e status
 import { TIPOS, buscarElevador } from '../../../data/ocorrencias'
 import { formatarData } from '../utilsAtendente'
 import BadgePrioridade from './BadgePrioridade'
 import BadgeStatus from './BadgeStatus'
 
-// onAbrir recebe o id da ocorrência; sem ele, o botão "Ver detalhes" não aparece
 function ItemOcorrencia({ ocorrencia, onAbrir }) {
   const elevador = buscarElevador(ocorrencia.elevadorId)
   const tipo = TIPOS[ocorrencia.tipo]?.rotulo ?? ocorrencia.tipo

@@ -1,10 +1,7 @@
-// Funções de apoio da tela do atendente (P2):
-// formatar datas e aplicar busca + filtros na lista de ocorrências.
 import { ELEVADORES, PRIORIDADES, STATUS, TIPOS, buscarElevador, filaDeAtendimento, validarOcorrencia } from '../../data/ocorrencias'
 
 const CAMPOS = ['tipo', 'elevadorId', 'descricao', 'solicitante']
 
-// Dados válidos de referência: servem de "gabarito" para testar um campo por vez
 const GABARITO = {
   tipo: 'falha_tecnica',
   elevadorId: ELEVADORES[0].id,
@@ -12,13 +9,8 @@ const GABARITO = {
   solicitante: 'Solicitante de teste',
 }
 
-// Do tipo mais urgente para o menos urgente (usado no painel de prioridades e no select do formulário)
 export const ORDEM_DOS_TIPOS = ['passageiro_preso', 'falha_tecnica', 'falta_energia', 'pedido_cliente']
 
-// Devolve um objeto { campo: mensagem } só com os campos que têm problema.
-// O validarOcorrencia (P1) devolve uma lista sem dizer de qual campo é cada erro;
-// então trocamos um campo de cada vez no gabarito e vemos se aparece erro.
-// Assim as regras e as mensagens ficam num lugar só: src/data/ocorrencias.js
 export function errosPorCampo(dados) {
   const erros = {}
 
@@ -47,9 +39,6 @@ export function formatarData(iso) {
   return `${dia}/${mes}/${data.getFullYear()} ${hora}:${minuto}`
 }
 
-// Ordem da lista do atendente: primeiro o que ainda não foi resolvido, na ordem da fila do
-// técnico (crítica primeiro, depois a mais antiga: filaDeAtendimento do P1); depois as
-// resolvidas, da mais recente para a mais antiga. Devolve uma lista nova, sem alterar a original.
 export function ordenarOcorrencias(lista) {
   const fila = filaDeAtendimento(lista)
   const resolvidas = lista
@@ -59,12 +48,8 @@ export function ordenarOcorrencias(lista) {
   return [...fila, ...resolvidas]
 }
 
-// Filtros da lista. Texto vazio = filtro desligado.
-// busca: texto livre · status / tipo: uma das chaves de STATUS / TIPOS
-// dataInicio / dataFim: 'AAAA-MM-DD' (o dia em que a ocorrência foi aberta)
 export const FILTROS_VAZIOS = { busca: '', status: '', tipo: '', dataInicio: '', dataFim: '' }
 
-// Há algum filtro ligado? (uma busca só com espaços não conta)
 export function temFiltroAtivo(filtros) {
   return (
     filtros.busca.trim() !== '' ||
@@ -75,8 +60,6 @@ export function temFiltroAtivo(filtros) {
   )
 }
 
-// Dia local em que a data caiu, no formato 'AAAA-MM-DD' (o mesmo do <input type="date">).
-// Data inválida devolve texto vazio.
 function dataLocal(iso) {
   if (!iso) return '—'
 
@@ -89,12 +72,10 @@ function dataLocal(iso) {
   return `${data.getFullYear()}-${mes}-${dia}`
 }
 
-// Minúsculas e sem acento: "Síndico", "SINDICO" e "sindico" viram a mesma palavra
 function normalizar(texto) {
   return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
 
-// Tudo o que o atendente pode digitar para achar uma ocorrência, num texto só
 function textoDeBusca(o) {
   const elevador = buscarElevador(o.elevadorId)
 
@@ -111,16 +92,13 @@ function textoDeBusca(o) {
   ].join(' '))
 }
 
-// Aplica os filtros e devolve uma lista nova (a original não muda).
 export function filtrarOcorrencias(lista, filtros) {
-  // Busca com várias palavras: a ocorrência precisa ter todas (em qualquer ordem)
   const termos = normalizar(filtros.busca).trim().split(' ').filter(t => t !== '')
 
   return lista.filter(o => {
     if (filtros.status !== '' && o.status !== filtros.status) return false
     if (filtros.tipo !== '' && o.tipo !== filtros.tipo) return false
 
-    // Período: compara o dia da abertura com o dia inicial e o final (inclusive)
     if (filtros.dataInicio !== '' || filtros.dataFim !== '') {
       const dia = dataLocal(o.abertaEm)
       if (dia === '') return false
