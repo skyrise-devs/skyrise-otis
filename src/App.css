@@ -1,4 +1,4 @@
-/* Layout geral e navegação provisória (a P3 substitui pelo menu definitivo) */
+/* Layout geral e menu definitivo (P3) */
 #app-root {
   min-height: 100vh;
   display: flex;
@@ -6,46 +6,138 @@
 }
 
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 24px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   background: var(--cor-superficie);
   border-bottom: 1px solid var(--cor-borda);
 }
 
+.app-header button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-header button:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.app-header svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .app-marca {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 4px 0;
+  border: 0;
+  background: none;
+  color: var(--cor-texto);
+  text-align: left;
+}
+
+.app-marca-icone {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--raio);
+  background: var(--cor-destaque);
+  color: #fff;
+}
+
+.app-marca-icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.app-marca-texto {
+  display: grid;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
   color: var(--cor-destaque);
+}
+
+.app-marca-texto small {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: var(--cor-texto-suave);
 }
 
 .app-nav {
   display: flex;
-  gap: 8px;
-}
-
-.app-nav button,
-.app-restaurar {
-  font: inherit;
-  padding: 6px 14px;
+  gap: 4px;
+  padding: 3px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio);
-  background: var(--cor-superficie);
+  background: var(--cor-fundo);
+}
+
+.app-nav button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: calc(var(--raio) - 3px);
+  background: transparent;
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-nav button:hover {
   color: var(--cor-texto);
-  cursor: pointer;
 }
 
 .app-nav button.ativo {
   background: var(--cor-destaque);
-  border-color: var(--cor-destaque);
   color: #fff;
 }
 
+.app-nav-selo {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--cor-critica);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .app-restaurar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-left: auto;
-  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
   color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.app-restaurar:hover {
+  color: var(--cor-texto);
 }
 
 .app-conteudo {
@@ -54,4 +146,37 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px;
+}
+
+/* Celular: marca e restaurar em cima, menu ocupando a largura toda embaixo */
+@media (max-width: 720px) {
+  .app-header {
+    gap: 10px;
+    padding: 10px 16px;
+  }
+
+  .app-nav {
+    order: 3;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .app-nav button {
+    justify-content: center;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+
+  .app-restaurar span {
+    display: none;
+  }
+
+  .app-restaurar {
+    padding: 8px;
+  }
+
+  .app-conteudo {
+    padding: 20px 16px;
+  }
 }
