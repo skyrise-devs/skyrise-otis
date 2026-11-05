@@ -1,0 +1,72 @@
+import { STATUS, TIPOS } from '../../../data/ocorrencias'
+import { ORDEM_DOS_TIPOS, temFiltroAtivo } from '../utilsAtendente'
+
+const ORDEM_DOS_STATUS = ['aberta', 'em_atendimento', 'resolvida']
+
+function BarraFiltros({ filtros, onMudar, onLimpar }) {
+  function atualizarFiltro(e) {
+    onMudar({ ...filtros, [e.target.name]: e.target.value })
+  }
+
+  const periodoInvalido =
+    filtros.dataInicio !== '' && filtros.dataFim !== '' && filtros.dataInicio > filtros.dataFim
+
+  return (
+    <div className="at-filtros" role="search">
+      <label className="at-campo at-filtro-busca">
+        <span className="at-campo-rotulo">Buscar</span>
+        <input
+          type="search"
+          name="busca"
+          value={filtros.busca}
+          onChange={atualizarFiltro}
+          placeholder="Número, prédio, solicitante ou descrição"
+        />
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Status</span>
+        <select name="status" value={filtros.status} onChange={atualizarFiltro}>
+          <option value="">Todos os status</option>
+          {ORDEM_DOS_STATUS.map(status => (
+            <option key={status} value={status}>{STATUS[status].rotulo}</option>
+          ))}
+        </select>
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Tipo</span>
+        <select name="tipo" value={filtros.tipo} onChange={atualizarFiltro}>
+          <option value="">Todos os tipos</option>
+          {ORDEM_DOS_TIPOS.map(tipo => (
+            <option key={tipo} value={tipo}>{TIPOS[tipo].rotulo}</option>
+          ))}
+        </select>
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Aberta a partir de</span>
+        <input type="date" name="dataInicio" value={filtros.dataInicio} onChange={atualizarFiltro} />
+      </label>
+
+      <label className="at-campo">
+        <span className="at-campo-rotulo">Aberta até</span>
+        <input type="date" name="dataFim" value={filtros.dataFim} onChange={atualizarFiltro} />
+      </label>
+
+      {periodoInvalido && (
+        <p className="at-filtros-aviso" role="alert">
+          A data inicial está depois da data final. Ajuste o período para ver resultados.
+        </p>
+      )}
+
+      {temFiltroAtivo(filtros) && (
+        <div className="at-filtros-acoes">
+          <button type="button" className="at-btn" onClick={onLimpar}>Limpar filtros</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default BarraFiltros
