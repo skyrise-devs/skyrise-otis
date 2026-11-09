@@ -1,0 +1,38 @@
+import { TIPOS } from '../../../data/ocorrencias'
+import { ORDEM_DOS_TIPOS } from '../utilsAtendente'
+import BadgePrioridade from './BadgePrioridade'
+
+const DICAS = {
+  passageiro_preso: 'Há pessoas dentro da cabine sem conseguir sair.',
+  falha_tecnica: 'O elevador funciona com defeito: porta, ruído, nível ou botoeira.',
+  falta_energia: 'O elevador parou por queda ou oscilação de energia.',
+  pedido_cliente: 'Revisão, orçamento ou ajuste que não tem urgência.',
+}
+
+function PainelPrioridades() {
+  return (
+    <section className="at-cartao at-painel-prioridades">
+      <h2>Como definimos a prioridade</h2>
+      <p>O sistema calcula sozinho, a partir do tipo da ocorrência.</p>
+
+      <ul className="at-lista-prioridades">
+        {ORDEM_DOS_TIPOS.map(tipo => (
+          <li key={tipo}>
+            <BadgePrioridade prioridade={TIPOS[tipo].prioridade} />
+            <div>
+              <span className="at-tipo-rotulo">{TIPOS[tipo].rotulo}</span>
+              <small className="at-tipo-dica">{DICAS[tipo]}</small>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <p className="at-aviso-fila">
+        <strong>Passageiro preso fura a fila:</strong> a ocorrência vai para o topo da
+        fila do técnico, na frente de qualquer outra.
+      </p>
+    </section>
+  )
+}
+
+export default PainelPrioridades
