@@ -60,7 +60,7 @@ Antes de abrir um PR, rode `npm run lint` e `npm run build`: o GitHub roda os do
 ```
 src/
 ├── App.jsx                 estado das ocorrências + troca de tela (começa na tela inicial)
-├── index.css               variáveis de cor e fonte (P5)
+├── index.css               variáveis de cor e fonte da identidade visual
 ├── App.css                 layout geral e menu
 ├── components/
 │   ├── Header.jsx          menu definitivo (P3)

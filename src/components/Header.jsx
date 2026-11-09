@@ -26,8 +26,8 @@ function Header({ telaAtual, onNavegar, onRestaurarExemplo, criticasAguardando }
       >
         <span className="app-marca-icone"><IconeTela nome="marca" /></span>
         <span className="app-marca-texto">
-          SkyRise
-          <small>Gestão de ocorrências</small>
+          <span>Sky<em>Rise</em> Devs</span>
+          <small>Smart Elevator Solutions</small>
         </span>
       </button>
 

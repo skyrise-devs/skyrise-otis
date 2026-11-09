@@ -1,18 +1,20 @@
 /* Base global da SPA: os estilos de cada tela ficam nos arquivos CSS dela.
-   As cores e fontes definitivas vêm da identidade visual da P5 (Gabriela):
-   basta trocar os valores das variáveis abaixo. */
+   Identidade visual SkyRise Devs: azul-marinho, azul elétrico e prata do logo.
+   Para ajustar as cores do site inteiro, basta trocar os valores das variáveis abaixo. */
 :root {
-  --cor-fundo: #f4f6f8;
-  --cor-superficie: #ffffff;
-  --cor-texto: #1b2430;
-  --cor-texto-suave: #5b6675;
-  --cor-borda: #d8dee6;
-  --cor-destaque: #1f5fae;
+  color-scheme: dark;
 
-  --cor-critica: #c62828;
-  --cor-alta: #e65100;
-  --cor-media: #f9a825;
-  --cor-baixa: #2e7d32;
+  --cor-fundo: #050914;
+  --cor-superficie: #0d1628;
+  --cor-texto: #eef2f8;
+  --cor-texto-suave: #9fadc2;
+  --cor-borda: #24324b;
+  --cor-destaque: #1c84ee;
+
+  --cor-critica: #e5484d;
+  --cor-alta: #e8710a;
+  --cor-media: #f5b301;
+  --cor-baixa: #1e9e5a;
 
   --fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --raio: 8px;
