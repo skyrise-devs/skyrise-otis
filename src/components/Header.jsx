@@ -1,5 +1,7 @@
-// Navegação provisória: a P3 (Ju) substitui pela tela inicial + menu definitivo,
-// usando a identidade visual da P5 (Gabriela).
+import IconeTela from './IconeTela'
+
+// Menu definitivo (P3 · Ju), com a identidade visual da P5 (Gabriela) nas variáveis do index.css.
+// A marca leva para a tela inicial; o selo vermelho no Técnico conta as críticas sem técnico.
 
 const TELAS = [
   { id: 'atendente', rotulo: 'Atendente' },
@@ -7,10 +9,27 @@ const TELAS = [
   { id: 'gestao', rotulo: 'Gestão' },
 ]
 
-function Header({ telaAtual, onNavegar, onRestaurarExemplo }) {
+function Header({ telaAtual, onNavegar, onRestaurarExemplo, criticasAguardando }) {
+  function restaurar() {
+    if (window.confirm('Voltar para os 30 exemplos? As ocorrências criadas ou alteradas serão perdidas.')) {
+      onRestaurarExemplo()
+    }
+  }
+
   return (
     <header className="app-header">
-      <strong className="app-marca">SkyRise</strong>
+      <button
+        type="button"
+        className="app-marca"
+        aria-current={telaAtual === 'inicio' ? 'page' : undefined}
+        onClick={() => onNavegar('inicio')}
+      >
+        <span className="app-marca-icone"><IconeTela nome="marca" /></span>
+        <span className="app-marca-texto">
+          <span>Sky<em>Rise</em> Devs</span>
+          <small>Smart Elevator Solutions</small>
+        </span>
+      </button>
 
       <nav className="app-nav" aria-label="Telas do sistema">
         {TELAS.map(t => (
@@ -21,13 +40,20 @@ function Header({ telaAtual, onNavegar, onRestaurarExemplo }) {
             aria-current={t.id === telaAtual ? 'page' : undefined}
             onClick={() => onNavegar(t.id)}
           >
-            {t.rotulo}
+            <IconeTela nome={t.id} />
+            <span>{t.rotulo}</span>
+            {t.id === 'tecnico' && criticasAguardando > 0 && (
+              <span className="app-nav-selo" aria-label={criticasAguardando === 1 ? '1 crítica aguardando técnico' : `${criticasAguardando} críticas aguardando técnico`}>
+                {criticasAguardando}
+              </span>
+            )}
           </button>
         ))}
       </nav>
 
-      <button type="button" className="app-restaurar" onClick={onRestaurarExemplo}>
-        Restaurar dados de exemplo
+      <button type="button" className="app-restaurar" onClick={restaurar} aria-label="Restaurar dados de exemplo" title="Restaurar dados de exemplo">
+        <IconeTela nome="restaurar" />
+        <span>Restaurar dados de exemplo</span>
       </button>
     </header>
   )

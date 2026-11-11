@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
+import TelaInicio from './telas/inicio/TelaInicio'
 import TelaAtendente from './telas/atendente/TelaAtendente'
 import TelaTecnico from './telas/tecnico/TelaTecnico'
 import TelaGestao from './telas/gestao/TelaGestao'
@@ -13,9 +14,9 @@ import {
   mudarStatus,
 } from './data/ocorrencias'
 
-// Telas disponíveis: 'atendente' | 'tecnico' | 'gestao'
+// Telas disponíveis: 'inicio' | 'atendente' | 'tecnico' | 'gestao'
 function App() {
-  const [tela, setTela] = useState('atendente')
+  const [tela, setTela] = useState('inicio')
   const [ocorrencias, setOcorrencias] = useState(carregarOcorrencias)
 
   useEffect(() => {
@@ -59,11 +60,23 @@ function App() {
     setOcorrencias(dadosDeExemplo())
   }
 
+  // Selo vermelho do menu: críticas que ninguém assumiu ainda
+  const criticasAguardando = ocorrencias.filter(o => o.prioridade === 'critica' && o.status === 'aberta').length
+
   return (
     <div id="app-root">
-      <Header telaAtual={tela} onNavegar={navegar} onRestaurarExemplo={restaurarExemplo} />
+      <Header
+        telaAtual={tela}
+        onNavegar={navegar}
+        onRestaurarExemplo={restaurarExemplo}
+        criticasAguardando={criticasAguardando}
+      />
 
       <main className="app-conteudo">
+        {tela === 'inicio' && (
+          <TelaInicio ocorrencias={ocorrencias} onNavegar={navegar} />
+        )}
+
         {tela === 'atendente' && (
           <TelaAtendente
             ocorrencias={ocorrencias}

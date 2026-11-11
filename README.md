@@ -33,6 +33,18 @@ Só o que vimos até a Fase 7 (mesma base do projeto ReaproveitaAi):
 - **Sem back-end**: os dados ficam no `localStorage` do navegador
 - **ESLint**, verificado automaticamente em cada Pull Request
 
+## Tela do técnico e navegação (P3)
+
+**Navegação.** O sistema abre na **tela inicial**, com um card para cada perfil, o aviso de passageiro preso aguardando técnico e a legenda da prioridade automática. O menu do topo fica fixo; clicar em **SkyRise** volta para o início. O selo vermelho no **Técnico** mostra quantas críticas ainda não têm técnico. No celular, o menu ocupa a largura toda embaixo da marca. **Restaurar dados de exemplo** pede confirmação antes de apagar.
+
+**Técnico** (pensada primeiro para o celular):
+
+- **Quem está em campo?** O técnico escolhe o próprio nome; a escolha fica salva no navegador (`skyrise:tecnico:v1`) e dá para **Trocar**.
+- **Resumo:** críticas aguardando, ocorrências sem técnico e quantas estão com ele agora.
+- **Abas:** *Fila geral* (todas as não resolvidas, na ordem de `filaDeAtendimento`: crítica primeiro, depois a mais antiga, com filtro **Só a minha região**), *Minhas* (em atendimento com ele) e *Concluídas* (as 10 últimas que ele resolveu).
+- **Card:** prioridade com a cor do tema, status, tempo de espera, local (com a etiqueta *Sua região*), solicitante, responsável e o histórico completo.
+- **Ações:** *Assumir ocorrência* usa `onAtribuir` (a ocorrência passa para *Em atendimento*). Com a ocorrência assumida, o técnico escreve uma observação e escolhe *Registrar andamento* ou *Concluir atendimento*, ambos via `onAtualizarStatus`. A observação é obrigatória (mínimo 5 caracteres) e entra no histórico.
+
 ## Como rodar
 
 ```bash
@@ -47,14 +59,17 @@ Antes de abrir um PR, rode `npm run lint` e `npm run build`: o GitHub roda os do
 
 ```
 src/
-├── App.jsx                 estado das ocorrências + troca de tela
-├── index.css               variáveis de cor e fonte (P5)
+├── App.jsx                 estado das ocorrências + troca de tela (começa na tela inicial)
+├── index.css               variáveis de cor e fonte da identidade visual
 ├── App.css                 layout geral e menu
-├── components/Header.jsx   menu provisório (P3 substitui)
+├── components/
+│   ├── Header.jsx          menu definitivo (P3)
+│   └── IconeTela.jsx       ícones SVG do menu e da tela inicial (P3)
 ├── data/
 │   ├── ocorrencias.js      regras e funções dos dados (P1)
 │   └── dadosExemplo.js     elevadores, técnicos e ocorrências de exemplo (P1)
 └── telas/
+    ├── inicio/             tela inicial (P3)
     ├── atendente/          P2
     ├── tecnico/            P3
     └── gestao/             P4

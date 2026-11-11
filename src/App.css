@@ -1,4 +1,4 @@
-/* Layout geral e navegação provisória (a P3 substitui pelo menu definitivo) */
+/* Layout geral e menu definitivo (P3) */
 #app-root {
   min-height: 100vh;
   display: flex;
@@ -6,46 +6,151 @@
 }
 
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 24px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   background: var(--cor-superficie);
   border-bottom: 1px solid var(--cor-borda);
 }
 
+.app-header button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-header button:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.app-header svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .app-marca {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 4px 0;
+  border: 0;
+  background: none;
+  color: var(--cor-texto);
+  text-align: left;
+}
+
+.app-marca-icone {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--cor-texto);
+}
+
+.app-marca-icone svg {
+  width: 34px;
+  height: 34px;
+}
+
+.app-marca-texto {
+  display: grid;
+  gap: 2px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--cor-texto);
+}
+
+.app-marca-texto em {
+  font-style: normal;
   color: var(--cor-destaque);
+}
+
+.app-marca-texto small {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--cor-texto-suave);
 }
 
 .app-nav {
   display: flex;
-  gap: 8px;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-fundo);
 }
 
-.app-nav button,
-.app-restaurar {
-  font: inherit;
+.app-nav button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
   padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color .2s, box-shadow .2s, color .2s, transform .15s;
+}
+
+.app-nav button:hover {
+  color: var(--cor-texto);
+}
+
+/* Bolha de vidro: branco quase transparente com um brilho fino na borda */
+.app-nav button.ativo {
+  background: color-mix(in srgb, #fff 12%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 28%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, #fff 10%, transparent),
+    0 2px 8px color-mix(in srgb, #000 30%, transparent);
+  color: var(--cor-texto);
+}
+
+.app-nav button:active {
+  transform: scale(.97);
+}
+
+.app-nav-selo {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--cor-critica);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-restaurar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 6px 12px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio);
   background: var(--cor-superficie);
-  color: var(--cor-texto);
-  cursor: pointer;
-}
-
-.app-nav button.ativo {
-  background: var(--cor-destaque);
-  border-color: var(--cor-destaque);
-  color: #fff;
-}
-
-.app-restaurar {
-  margin-left: auto;
-  font-size: 13px;
   color: var(--cor-texto-suave);
+  font-size: 13px;
+}
+
+.app-restaurar:hover {
+  color: var(--cor-texto);
 }
 
 .app-conteudo {
@@ -54,4 +159,50 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px;
+}
+
+/* Celular: marca e restaurar em cima, menu ocupando a largura toda embaixo */
+@media (max-width: 720px) {
+  .app-header {
+    gap: 10px;
+    padding: 10px 16px;
+  }
+
+  .app-nav {
+    order: 3;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .app-nav button {
+    justify-content: center;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+
+  .app-restaurar span {
+    display: none;
+  }
+
+  .app-restaurar {
+    padding: 8px;
+  }
+
+  .app-conteudo {
+    padding: 20px 16px;
+  }
+}
+
+/* O overflow-x: hidden da base impede o menu de grudar no topo; clip corta igual sem esse efeito */
+body,
+#root,
+#app-root {
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-nav button {
+    transition: none;
+  }
 }
